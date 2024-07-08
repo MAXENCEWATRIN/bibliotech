@@ -1,10 +1,10 @@
 package com.maxencew.biblioto.application.service.adapter;
 
-import com.maxencew.biblioto.application.mapper.BookEntityMapper;
+import com.maxencew.biblioto.application.response.isbn.BookIsbnResponse;
+import com.maxencew.biblioto.application.service.IsbnService;
 import com.maxencew.biblioto.application.service.api.BookService;
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.domain.ports.spi.BookPersistencePort;
-import com.maxencew.biblioto.infrastructure.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,10 @@ import java.util.Objects;
 @AllArgsConstructor
 public class BookServiceAdapter implements BookService {
 
+    @Autowired
     private final BookPersistencePort bookPersistencePort;
-    private final IsbnApiService isbnApiService;
+    @Autowired
+    private final IsbnService isbnService;
 
     public Book addBook(Book book) {
         return this.bookPersistencePort.addBook(book);
@@ -42,7 +44,7 @@ public class BookServiceAdapter implements BookService {
 
         if (Objects.isNull(bookRetrieveByIsbnId)) {
             LOGGER.info("The Isbn id {} didn't exist yet, trying to retrieve information on external API.", isbnId);
-            return isbnApiService.findBookByIsbnIdOnExternalResources(isbnId);
+            return isbnService.findBookByIsbnIdOnExternalResources(isbnId);
         }
 
         return bookRetrieveByIsbnId;

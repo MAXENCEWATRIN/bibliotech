@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(setterPrefix = "with")
+@Builder
 public class Book {
 
     private Long id;

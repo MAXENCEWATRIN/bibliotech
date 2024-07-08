@@ -10,7 +10,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-@Builder(setterPrefix = "with")
 @Entity
 public class EditorEntity {
 

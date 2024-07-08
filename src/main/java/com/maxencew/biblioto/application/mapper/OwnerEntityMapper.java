@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface OwnerEntityMapper {
 
-    @Mapping(target = "withId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     OwnerEntity toEntity(Owner owner);
 
     Owner toDomain(OwnerEntity ownerEntity);

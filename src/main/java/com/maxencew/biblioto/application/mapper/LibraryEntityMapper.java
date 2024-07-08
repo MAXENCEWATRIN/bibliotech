@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface LibraryEntityMapper {
 
-    @Mapping(target = "withId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     LibraryEntity toEntity(Library library);
 
     Library toDomain(LibraryEntity libraryEntity);

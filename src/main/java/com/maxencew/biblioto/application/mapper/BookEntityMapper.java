@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface BookEntityMapper {
 
-    @Mapping(target = "withId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     BookEntity toEntity(Book book);
 
     Book toDomain(BookEntity bookEntity);

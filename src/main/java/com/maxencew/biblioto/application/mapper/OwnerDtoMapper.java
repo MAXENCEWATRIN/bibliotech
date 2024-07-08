@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface OwnerDtoMapper {
 
-    @Mapping(target = "withId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Owner toDomain(OwnerRequest request);
 
     OwnerResponse toDto(Owner owner);

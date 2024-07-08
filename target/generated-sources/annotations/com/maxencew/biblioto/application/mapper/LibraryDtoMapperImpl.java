@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T18:30:18+0200",
+    date = "2024-07-08T20:20:21+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -22,9 +22,14 @@ public class LibraryDtoMapperImpl implements LibraryDtoMapper {
             return null;
         }
 
-        Library.LibraryBuilder library = Library.builder();
+        Long id = null;
+        String name = null;
+        String location = null;
+        Integer capacity = null;
 
-        return library.build();
+        Library library = new Library( id, name, location, capacity );
+
+        return library;
     }
 
     @Override
@@ -33,9 +38,14 @@ public class LibraryDtoMapperImpl implements LibraryDtoMapper {
             return null;
         }
 
-        LibraryResponse.LibraryResponseBuilder libraryResponse = LibraryResponse.builder();
+        LibraryResponse libraryResponse = new LibraryResponse();
 
-        return libraryResponse.build();
+        libraryResponse.setId( library.getId() );
+        libraryResponse.setName( library.getName() );
+        libraryResponse.setLocation( library.getLocation() );
+        libraryResponse.setCapacity( library.getCapacity() );
+
+        return libraryResponse;
     }
 
     @Override

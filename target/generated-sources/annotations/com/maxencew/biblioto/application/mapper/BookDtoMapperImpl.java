@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T18:30:18+0200",
+    date = "2024-07-08T20:20:22+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -24,6 +24,16 @@ public class BookDtoMapperImpl implements BookDtoMapper {
 
         Book.BookBuilder book = Book.builder();
 
+        book.isbnId( request.getIsbnId() );
+        book.title( request.getTitle() );
+        book.subtitle( request.getSubtitle() );
+        book.synopsis( request.getSynopsis() );
+        book.summary( request.getSummary() );
+        book.numberPage( request.getNumberPage() );
+        book.coverPage( request.getCoverPage() );
+        book.traductionLanguage( request.getTraductionLanguage() );
+        book.initialLanguage( request.getInitialLanguage() );
+
         return book.build();
     }
 
@@ -33,9 +43,17 @@ public class BookDtoMapperImpl implements BookDtoMapper {
             return null;
         }
 
-        BookResponse.BookResponseBuilder bookResponse = BookResponse.builder();
+        Long id = null;
 
-        return bookResponse.build();
+        id = book.getId();
+
+        String name = null;
+        String location = null;
+        Integer capacity = null;
+
+        BookResponse bookResponse = new BookResponse( id, name, location, capacity );
+
+        return bookResponse;
     }
 
     @Override

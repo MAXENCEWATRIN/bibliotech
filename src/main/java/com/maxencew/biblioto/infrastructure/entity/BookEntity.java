@@ -14,7 +14,6 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(setterPrefix = "with")
 @Entity
 public class BookEntity {
 

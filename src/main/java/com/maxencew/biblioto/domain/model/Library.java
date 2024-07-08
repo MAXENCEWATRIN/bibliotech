@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-@Builder(setterPrefix = "with")
 public class Library {
 
     private Long id;

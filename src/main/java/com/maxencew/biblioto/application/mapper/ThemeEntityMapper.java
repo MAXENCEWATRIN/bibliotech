@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ThemeEntityMapper {
 
-    @Mapping(target = "withId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     ThemeEntity toEntity(Theme theme);
 
     Theme toDomain(ThemeEntity theme);

@@ -1,5 +1,6 @@
 package com.maxencew.biblioto.infrastructure.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@Builder(setterPrefix = "with")
+@Entity
 public class ThemeEntity {
 
     @Id

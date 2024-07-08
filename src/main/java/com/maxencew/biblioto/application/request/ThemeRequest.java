@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@Builder(setterPrefix = "with")
+
 public class ThemeRequest {
 
     private Long id;

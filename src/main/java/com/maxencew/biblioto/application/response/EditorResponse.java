@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-@Builder(setterPrefix = "with")
+
 public class EditorResponse {
 
     private String name;

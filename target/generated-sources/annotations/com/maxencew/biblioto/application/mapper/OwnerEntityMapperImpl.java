@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T18:30:18+0200",
+    date = "2024-07-08T20:20:22+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -21,9 +21,19 @@ public class OwnerEntityMapperImpl implements OwnerEntityMapper {
             return null;
         }
 
-        OwnerEntity.OwnerEntityBuilder ownerEntity = OwnerEntity.builder();
+        String firstName = null;
+        String lastName = null;
+        String note = null;
 
-        return ownerEntity.build();
+        firstName = owner.getFirstName();
+        lastName = owner.getLastName();
+        note = owner.getNote();
+
+        Long id = null;
+
+        OwnerEntity ownerEntity = new OwnerEntity( id, firstName, lastName, note );
+
+        return ownerEntity;
     }
 
     @Override
@@ -32,9 +42,19 @@ public class OwnerEntityMapperImpl implements OwnerEntityMapper {
             return null;
         }
 
-        Owner.OwnerBuilder owner = Owner.builder();
+        Long id = null;
+        String firstName = null;
+        String lastName = null;
+        String note = null;
 
-        return owner.build();
+        id = ownerEntity.getId();
+        firstName = ownerEntity.getFirstName();
+        lastName = ownerEntity.getLastName();
+        note = ownerEntity.getNote();
+
+        Owner owner = new Owner( id, firstName, lastName, note );
+
+        return owner;
     }
 
     @Override

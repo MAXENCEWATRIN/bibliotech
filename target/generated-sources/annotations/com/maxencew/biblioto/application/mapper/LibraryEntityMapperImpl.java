@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T18:30:18+0200",
+    date = "2024-07-08T20:20:22+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -21,9 +21,19 @@ public class LibraryEntityMapperImpl implements LibraryEntityMapper {
             return null;
         }
 
-        LibraryEntity.LibraryEntityBuilder libraryEntity = LibraryEntity.builder();
+        String name = null;
+        String location = null;
+        Integer capacity = null;
 
-        return libraryEntity.build();
+        name = library.getName();
+        location = library.getLocation();
+        capacity = library.getCapacity();
+
+        Long id = null;
+
+        LibraryEntity libraryEntity = new LibraryEntity( id, name, location, capacity );
+
+        return libraryEntity;
     }
 
     @Override
@@ -32,9 +42,19 @@ public class LibraryEntityMapperImpl implements LibraryEntityMapper {
             return null;
         }
 
-        Library.LibraryBuilder library = Library.builder();
+        Long id = null;
+        String name = null;
+        String location = null;
+        Integer capacity = null;
 
-        return library.build();
+        id = libraryEntity.getId();
+        name = libraryEntity.getName();
+        location = libraryEntity.getLocation();
+        capacity = libraryEntity.getCapacity();
+
+        Library library = new Library( id, name, location, capacity );
+
+        return library;
     }
 
     @Override

@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-@Builder(setterPrefix = "with")
 public class Owner {
 
+    private Long id;
     private String firstName;
     private String lastName;
     private String note;

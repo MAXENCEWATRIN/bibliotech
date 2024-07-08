@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface LibraryDtoMapper {
 
-    @Mapping(target = "withId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Library toDomain(LibraryRequest request);
 
     LibraryResponse toDto(Library library);

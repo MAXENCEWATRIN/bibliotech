@@ -1,9 +1,10 @@
-package com.maxencew.biblioto.infrastructure.controller;
+package com.maxencew.biblioto.web.controller;
 
 import com.maxencew.biblioto.application.mapper.ThemeDtoMapper;
 import com.maxencew.biblioto.application.request.ThemeRequest;
 import com.maxencew.biblioto.application.response.ThemeResponse;
-import com.maxencew.biblioto.application.service.adapter.ThemeService;
+import com.maxencew.biblioto.application.service.adapter.ThemeServiceAdapter;
+import com.maxencew.biblioto.application.service.api.ThemeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,36 +15,36 @@ import java.util.List;
 public class ThemeController {
 
     @Autowired
-    private ThemeService themeService;
+    private ThemeService themeServiceAdapter;
 
     @Autowired
     private ThemeDtoMapper themeDtoMapper;
 
     @PostMapping
     public ThemeResponse addTheme(@RequestBody ThemeRequest theme) {
-        return themeDtoMapper.toDto(themeService.add(themeDtoMapper.toDomain(theme)));
+        return themeDtoMapper.toDto(themeServiceAdapter.addTheme(themeDtoMapper.toDomain(theme)));
     }
 
     @PutMapping("/{id}")
     public ThemeResponse updateTheme(@PathVariable Long id, @RequestBody ThemeRequest theme) {
         theme.setId(id);
-        return themeDtoMapper.toDto(themeService.add(themeDtoMapper.toDomain(theme)));
+        return themeDtoMapper.toDto(themeServiceAdapter.addTheme(themeDtoMapper.toDomain(theme)));
     }
 
     @DeleteMapping("/{id}")
     public void deleteTheme(@PathVariable Long id, @RequestBody ThemeRequest theme) {
         theme.setId(id);
-        themeService.delete(themeDtoMapper.toDomain(theme));
+        themeServiceAdapter.removeTheme(themeDtoMapper.toDomain(theme));
     }
 
     @GetMapping
     public List<ThemeResponse> getAllThemes() {
-        return themeDtoMapper.toDtoList(themeService.getAll());
+        return themeDtoMapper.toDtoList(themeServiceAdapter.getThemes());
     }
 
     @GetMapping("/{id}")
     public ThemeResponse getThemeById(@PathVariable Long id) {
-        return themeDtoMapper.toDto(themeService.getById(id));
+        return themeDtoMapper.toDto(themeServiceAdapter.getThemeById(id));
     }
 
 }

@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-@Builder(setterPrefix = "with")
 public class EditorRequest {
 
+    private Long id;
     private String name;
     private String category;
 }

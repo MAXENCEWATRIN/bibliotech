@@ -8,9 +8,9 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@Builder(setterPrefix = "with")
 public class Theme {
 
+    private Long id;
     private String name;
     private List<String> keywords;
 

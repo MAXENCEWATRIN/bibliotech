@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ThemeDtoMapper {
 
-    @Mapping(target = "withId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Theme toDomain(ThemeRequest request);
 
     ThemeResponse toDto(Theme theme);
