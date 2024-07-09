@@ -4,11 +4,12 @@ import com.maxencew.biblioto.application.mapper.LibraryEntityMapper;
 import com.maxencew.biblioto.domain.model.Library;
 import com.maxencew.biblioto.domain.ports.spi.LibraryPersistencePort;
 import com.maxencew.biblioto.infrastructure.repository.LibraryRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Component
 public class LibraryPersistenceAdapter implements LibraryPersistencePort {
 
     private final LibraryRepository libraryRepository;

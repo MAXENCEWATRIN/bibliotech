@@ -1,6 +1,7 @@
 package com.maxencew.biblioto.application.mapper;
 
 import com.maxencew.biblioto.domain.model.Editor;
+import com.maxencew.biblioto.infrastructure.entity.BookEntity;
 import com.maxencew.biblioto.infrastructure.entity.EditorEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T20:20:22+0200",
+    date = "2024-07-10T00:17:21+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -28,8 +29,9 @@ public class EditorEntityMapperImpl implements EditorEntityMapper {
         category = editor.getCategory();
 
         Long id = null;
+        List<BookEntity> books = null;
 
-        EditorEntity editorEntity = new EditorEntity( id, name, category );
+        EditorEntity editorEntity = new EditorEntity( id, name, category, books );
 
         return editorEntity;
     }
@@ -40,19 +42,13 @@ public class EditorEntityMapperImpl implements EditorEntityMapper {
             return null;
         }
 
-        Long id = null;
-        String name = null;
-        String category = null;
+        Editor.EditorBuilder editor1 = Editor.builder();
 
-        id = editor.getId();
-        name = editor.getName();
-        category = editor.getCategory();
+        editor1.id( editor.getId() );
+        editor1.name( editor.getName() );
+        editor1.category( editor.getCategory() );
 
-        String edition = null;
-
-        Editor editor1 = new Editor( id, name, category, edition );
-
-        return editor1;
+        return editor1.build();
     }
 
     @Override

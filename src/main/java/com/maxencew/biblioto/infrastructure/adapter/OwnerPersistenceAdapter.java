@@ -4,11 +4,12 @@ import com.maxencew.biblioto.application.mapper.OwnerEntityMapper;
 import com.maxencew.biblioto.domain.model.Owner;
 import com.maxencew.biblioto.domain.ports.spi.OwnerPersistencePort;
 import com.maxencew.biblioto.infrastructure.repository.OwnerRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Component
 public class OwnerPersistenceAdapter implements OwnerPersistencePort {
 
     private final OwnerRepository ownerRepository;

@@ -1,6 +1,7 @@
 package com.maxencew.biblioto.application.mapper;
 
 import com.maxencew.biblioto.domain.model.Library;
+import com.maxencew.biblioto.infrastructure.entity.BookEntity;
 import com.maxencew.biblioto.infrastructure.entity.LibraryEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T20:20:22+0200",
+    date = "2024-07-10T00:17:20+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -30,8 +31,9 @@ public class LibraryEntityMapperImpl implements LibraryEntityMapper {
         capacity = library.getCapacity();
 
         Long id = null;
+        List<BookEntity> books = null;
 
-        LibraryEntity libraryEntity = new LibraryEntity( id, name, location, capacity );
+        LibraryEntity libraryEntity = new LibraryEntity( id, name, location, capacity, books );
 
         return libraryEntity;
     }

@@ -1,17 +1,17 @@
 package com.maxencew.biblioto.infrastructure.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
-@Entity
-public class LibraryEntity {
+@Entity(name = "LIBRARIES")
+public class LibraryEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +19,7 @@ public class LibraryEntity {
     private String name;
     private String location;
     private Integer capacity;
+    @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookEntity> books;
 
 }

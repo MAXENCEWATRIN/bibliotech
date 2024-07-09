@@ -1,0 +1,30 @@
+server:
+  servlet:
+    context-path: /biblioto
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  datasource:
+    url: jdbc:postgresql://localhost:5432/biblioto
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+external:
+  api:
+    isbn:
+      url: XXXXXXXXXX
+      key: XXXXXX
+    openLibrary:
+      login: PumE0lhOL6a3LUFX
+      key: XxWUS69U2ndRXXsg
+      login-api:
+        url: https://openlibrary.org/account/login
+      covers-api:
+        url: https://covers.openlibrary.org/b
+      books-api:
+        url: https://openlibrary.org/api/volumes/brief/

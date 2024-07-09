@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class Editor {
 
     private Long id;

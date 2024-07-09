@@ -5,3 +5,8 @@ spring.datasource.password=admin
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
+
+external.api.isbn.url=https://covers.openlibrary.org/b
+external.api.isbn.restkey=XXXXXX
+external.api.openlibrary.url=https://api2.isbndb.com/book
+external.api.openlibrary.restkey=XXXXXXXXXX
