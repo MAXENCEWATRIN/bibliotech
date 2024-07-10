@@ -1,11 +1,10 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
-import com.maxencew.biblioto.application.mapper.ThemeEntityMapper;
+import com.maxencew.biblioto.application.mapper.entity.ThemeEntityMapper;
 import com.maxencew.biblioto.domain.model.Theme;
 import com.maxencew.biblioto.domain.ports.spi.ThemePersistencePort;
 import com.maxencew.biblioto.infrastructure.repository.ThemeRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

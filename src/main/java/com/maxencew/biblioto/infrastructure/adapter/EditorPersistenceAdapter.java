@@ -1,11 +1,10 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
-import com.maxencew.biblioto.application.mapper.EditorEntityMapper;
+import com.maxencew.biblioto.application.mapper.entity.EditorEntityMapper;
 import com.maxencew.biblioto.domain.model.Editor;
 import com.maxencew.biblioto.domain.ports.spi.EditorPersistencePort;
 import com.maxencew.biblioto.infrastructure.repository.EditorRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

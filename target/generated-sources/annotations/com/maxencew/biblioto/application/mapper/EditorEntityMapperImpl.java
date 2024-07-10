@@ -1,5 +1,6 @@
 package com.maxencew.biblioto.application.mapper;
 
+import com.maxencew.biblioto.application.mapper.entity.EditorEntityMapper;
 import com.maxencew.biblioto.domain.model.Editor;
 import com.maxencew.biblioto.infrastructure.entity.BookEntity;
 import com.maxencew.biblioto.infrastructure.entity.EditorEntity;

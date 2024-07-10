@@ -1,11 +1,10 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
-import com.maxencew.biblioto.application.mapper.OwnerEntityMapper;
+import com.maxencew.biblioto.application.mapper.entity.OwnerEntityMapper;
 import com.maxencew.biblioto.domain.model.Owner;
 import com.maxencew.biblioto.domain.ports.spi.OwnerPersistencePort;
 import com.maxencew.biblioto.infrastructure.repository.OwnerRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.maxencew.biblioto.web.controller;
 
-import com.maxencew.biblioto.application.mapper.LibraryDtoMapper;
+import com.maxencew.biblioto.application.mapper.dto.LibraryDtoMapper;
 import com.maxencew.biblioto.application.request.LibraryRequest;
+import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
 import com.maxencew.biblioto.application.response.LibraryResponse;
-import com.maxencew.biblioto.application.service.adapter.LibraryServiceAdapter;
 import com.maxencew.biblioto.application.service.api.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +21,14 @@ public class LibraryController {
     private LibraryDtoMapper libraryDtoMapper;
 
     @PostMapping
-    public LibraryResponse addLibrary(@RequestBody LibraryRequest library) {
-        return libraryDtoMapper.toDto(libraryServiceAdapter.addLibrary(libraryDtoMapper.toDomain(library)));
+    public BibliotoHttpResponse<LibraryResponse> addLibrary(@RequestBody LibraryRequest library) {
+        return BibliotoHttpResponse.success(libraryDtoMapper.toDto(libraryServiceAdapter.addLibrary(libraryDtoMapper.toDomain(library))));
     }
 
     @PutMapping("/{id}")
-    public LibraryResponse updateLibrary(@PathVariable Long id, @RequestBody LibraryRequest library) {
+    public BibliotoHttpResponse<LibraryResponse> updateLibrary(@PathVariable Long id, @RequestBody LibraryRequest library) {
         library.setId(id);
-        return libraryDtoMapper.toDto(libraryServiceAdapter.addLibrary(libraryDtoMapper.toDomain(library)));
+        return BibliotoHttpResponse.success(libraryDtoMapper.toDto(libraryServiceAdapter.addLibrary(libraryDtoMapper.toDomain(library))));
     }
 
     @DeleteMapping("/{id}")
@@ -38,13 +38,13 @@ public class LibraryController {
     }
 
     @GetMapping
-    public List<LibraryResponse> getAllLibraries() {
-        return libraryDtoMapper.toDtoList(libraryServiceAdapter.getLibraries());
+    public BibliotoHttpResponse<List<LibraryResponse>> getAllLibraries() {
+        return BibliotoHttpResponse.success(libraryDtoMapper.toDtoList(libraryServiceAdapter.getLibraries()));
     }
 
     @GetMapping("/{id}")
-    public LibraryResponse getLibraryById(@PathVariable Long id) {
-        return libraryDtoMapper.toDto(libraryServiceAdapter.getLibraryById(id));
+    public BibliotoHttpResponse<LibraryResponse> getLibraryById(@PathVariable Long id) {
+        return BibliotoHttpResponse.success(libraryDtoMapper.toDto(libraryServiceAdapter.getLibraryById(id)));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.maxencew.biblioto.application.mapper;
 
+import com.maxencew.biblioto.application.mapper.entity.OwnerEntityMapper;
 import com.maxencew.biblioto.domain.model.Owner;
 import com.maxencew.biblioto.infrastructure.entity.BookEntity;
 import com.maxencew.biblioto.infrastructure.entity.OwnerEntity;

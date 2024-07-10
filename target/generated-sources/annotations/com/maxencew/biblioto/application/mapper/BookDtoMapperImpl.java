@@ -1,5 +1,6 @@
 package com.maxencew.biblioto.application.mapper;
 
+import com.maxencew.biblioto.application.mapper.dto.BookDtoMapper;
 import com.maxencew.biblioto.application.request.BookRequest;
 import com.maxencew.biblioto.application.request.EditorRequest;
 import com.maxencew.biblioto.application.request.LibraryRequest;
