@@ -1,14 +1,15 @@
 package com.maxencew.biblioto.application.request;
 
-import com.maxencew.biblioto.domain.model.Editor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BookRequest {
 
     private Long id;
@@ -27,7 +28,10 @@ public class BookRequest {
     private String initialLanguage;
     private Integer firstPublishYear;
     private String firstSentence;
-    private Editor editor;
+    private EditorRequest editor;
+    private LibraryRequest library;
+    private List<ThemeRequest> themes;
+    private OwnerRequest owner;
     private Boolean isWishList;
     private Boolean isAnOpenLibaryApiRegister;
     private Boolean isAnOpenLibaryApiBookValidate;

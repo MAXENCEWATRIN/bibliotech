@@ -28,4 +28,10 @@ public class ExternalApiConfiguration {
 
     @Value("${external.api.openLibrary.key}")
     private String openLibraryKey;
+
+    @Value("${external.api.openAI.url}")
+    private String openAIUrl;
+
+    @Value("${external.api.openAI.key}")
+    private String openAIApiKey;
 }

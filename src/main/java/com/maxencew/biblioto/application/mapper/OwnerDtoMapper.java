@@ -14,6 +14,7 @@ public interface OwnerDtoMapper {
     @Mapping(target = "id", ignore = true)
     Owner toDomain(OwnerRequest request);
 
+    @Mapping(target = "books", ignore = true)
     OwnerResponse toDto(Owner owner);
 
     List<Owner> toDomainList(List<OwnerRequest> ownerRequests);

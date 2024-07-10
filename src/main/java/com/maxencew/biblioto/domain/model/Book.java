@@ -1,11 +1,13 @@
 package com.maxencew.biblioto.domain.model;
 
+import com.maxencew.biblioto.application.request.ThemeRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -30,6 +32,9 @@ public class Book {
     private Integer firstPublishYear;
     private String firstSentence;
     private Editor editor;
+    private Library library;
+    private Owner owner;
+    private List<Theme> themes;
     private Boolean isWishList;
     private Boolean isAnOpenLibaryApiRegister;
     private Boolean isAnOpenLibaryApiBookValidate;

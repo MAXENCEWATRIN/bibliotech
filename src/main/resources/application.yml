@@ -28,3 +28,6 @@ external:
         url: https://covers.openlibrary.org/b
       books-api:
         url: https://openlibrary.org/api/volumes/brief/
+    openAI:
+      key: sk-proj-PnHmbTuHUb1kzp1TAArKT3BlbkFJop3QCvt1JnG8EkjV2sxA
+      url: https://api.openai.com/v1/chat/completions

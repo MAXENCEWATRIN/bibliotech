@@ -89,7 +89,7 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
                 List<OpenLibraryBookApiResponse.Item> items = response.getBody().getItems();
                 booksOpenLibraryResponse.add(Book.builder()
                         .isbnId(new BigDecimal(detailsData.getIsbn13().getFirst()))
-                        .oldIsbnId(new BigDecimal(detailsData.getIsbn10().getFirst()))
+                        .oldIsbnId(new BigDecimal(removeNonNumericCharacters(detailsData.getIsbn10().getFirst())))
                         .openLibraryId(openLibaryBookResponse.getOlids().getFirst())
                         .titleLong(detailsData.getFullTitle())
                         .title(detailsData.getTitle())
@@ -99,7 +99,7 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
                         .isAnOpenLibaryApiRegister(true)
                         .isAnOpenLibaryApiBookValidate(false)
                         .isWishList(false)
-                        .coverPageUrl(Objects.nonNull(items) ? items.getFirst().getCover().getLarge() : null)
+                        .coverPageUrl(items.isEmpty() ? null : items.getFirst().getCover().getLarge())
                         .build());
             });
 
@@ -125,5 +125,9 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
         }
         throw new IllegalArgumentException("Api call error.");
 
+    }
+
+    public static String removeNonNumericCharacters(String input) {
+        return input.replaceAll("[^0-9]", "");
     }
 }

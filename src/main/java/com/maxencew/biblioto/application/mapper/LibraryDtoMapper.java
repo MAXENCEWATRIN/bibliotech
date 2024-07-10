@@ -14,6 +14,7 @@ public interface LibraryDtoMapper {
     @Mapping(target = "id", ignore = true)
     Library toDomain(LibraryRequest request);
 
+    @Mapping(target = "books", ignore = true)
     LibraryResponse toDto(Library library);
 
     List<Library> toDomainList(List<LibraryRequest> librariesRequested);

@@ -14,5 +14,5 @@ public class ThemeResponse {
     private Long id;
     private String name;
     private List<String> keywords;
-
+    private List<BookResponse> books;
 }

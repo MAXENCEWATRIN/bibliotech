@@ -1,9 +1,20 @@
 package com.maxencew.biblioto.application.mapper;
 
 import com.maxencew.biblioto.application.request.BookRequest;
+import com.maxencew.biblioto.application.request.EditorRequest;
+import com.maxencew.biblioto.application.request.LibraryRequest;
+import com.maxencew.biblioto.application.request.OwnerRequest;
+import com.maxencew.biblioto.application.request.ThemeRequest;
 import com.maxencew.biblioto.application.response.BookResponse;
+import com.maxencew.biblioto.application.response.EditorResponse;
+import com.maxencew.biblioto.application.response.LibraryResponse;
+import com.maxencew.biblioto.application.response.OwnerResponse;
+import com.maxencew.biblioto.application.response.ThemeResponse;
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.domain.model.Editor;
+import com.maxencew.biblioto.domain.model.Library;
+import com.maxencew.biblioto.domain.model.Owner;
+import com.maxencew.biblioto.domain.model.Theme;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T00:17:20+0200",
+    date = "2024-07-10T02:46:27+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -41,7 +52,10 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         book.initialLanguage( request.getInitialLanguage() );
         book.firstPublishYear( request.getFirstPublishYear() );
         book.firstSentence( request.getFirstSentence() );
-        book.editor( request.getEditor() );
+        book.editor( editorRequestToEditor( request.getEditor() ) );
+        book.library( libraryRequestToLibrary( request.getLibrary() ) );
+        book.owner( ownerRequestToOwner( request.getOwner() ) );
+        book.themes( themeRequestListToThemeList( request.getThemes() ) );
         book.isWishList( request.getIsWishList() );
         book.isAnOpenLibaryApiRegister( request.getIsAnOpenLibaryApiRegister() );
         book.isAnOpenLibaryApiBookValidate( request.getIsAnOpenLibaryApiBookValidate() );
@@ -71,7 +85,10 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         String initialLanguage = null;
         Integer firstPublishYear = null;
         String firstSentence = null;
-        Editor editor = null;
+        EditorResponse editor = null;
+        LibraryResponse library = null;
+        List<ThemeResponse> themes = null;
+        OwnerResponse owner = null;
         Boolean isWishList = null;
         Boolean isAnOpenLibaryApiRegister = null;
         Boolean isAnOpenLibaryApiBookValidate = null;
@@ -92,12 +109,15 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         initialLanguage = book.getInitialLanguage();
         firstPublishYear = book.getFirstPublishYear();
         firstSentence = book.getFirstSentence();
-        editor = book.getEditor();
+        editor = editorToEditorResponse( book.getEditor() );
+        library = libraryToLibraryResponse( book.getLibrary() );
+        themes = themeListToThemeResponseList( book.getThemes() );
+        owner = ownerToOwnerResponse( book.getOwner() );
         isWishList = book.getIsWishList();
         isAnOpenLibaryApiRegister = book.getIsAnOpenLibaryApiRegister();
         isAnOpenLibaryApiBookValidate = book.getIsAnOpenLibaryApiBookValidate();
 
-        BookResponse bookResponse = new BookResponse( id, isbnId, oldIsbnId, title, authorName, titleLong, subtitle, synopsis, summary, numberOfPage, openLibraryId, coverPageUrl, traductionLanguage, initialLanguage, firstPublishYear, firstSentence, editor, isWishList, isAnOpenLibaryApiRegister, isAnOpenLibaryApiBookValidate );
+        BookResponse bookResponse = new BookResponse( id, isbnId, oldIsbnId, title, authorName, titleLong, subtitle, synopsis, summary, numberOfPage, openLibraryId, coverPageUrl, traductionLanguage, initialLanguage, firstPublishYear, firstSentence, editor, library, themes, owner, isWishList, isAnOpenLibaryApiRegister, isAnOpenLibaryApiBookValidate );
 
         return bookResponse;
     }
@@ -128,5 +148,182 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         }
 
         return list;
+    }
+
+    protected Editor editorRequestToEditor(EditorRequest editorRequest) {
+        if ( editorRequest == null ) {
+            return null;
+        }
+
+        Editor.EditorBuilder editor = Editor.builder();
+
+        editor.id( editorRequest.getId() );
+        editor.name( editorRequest.getName() );
+        editor.category( editorRequest.getCategory() );
+        editor.edition( editorRequest.getEdition() );
+
+        return editor.build();
+    }
+
+    protected Library libraryRequestToLibrary(LibraryRequest libraryRequest) {
+        if ( libraryRequest == null ) {
+            return null;
+        }
+
+        Long id = null;
+        String name = null;
+        String location = null;
+        Integer capacity = null;
+
+        id = libraryRequest.getId();
+        name = libraryRequest.getName();
+        location = libraryRequest.getLocation();
+        capacity = libraryRequest.getCapacity();
+
+        Library library = new Library( id, name, location, capacity );
+
+        return library;
+    }
+
+    protected Owner ownerRequestToOwner(OwnerRequest ownerRequest) {
+        if ( ownerRequest == null ) {
+            return null;
+        }
+
+        Long id = null;
+        String firstName = null;
+        String lastName = null;
+        String note = null;
+
+        id = ownerRequest.getId();
+        firstName = ownerRequest.getFirstName();
+        lastName = ownerRequest.getLastName();
+        note = ownerRequest.getNote();
+
+        Owner owner = new Owner( id, firstName, lastName, note );
+
+        return owner;
+    }
+
+    protected Theme themeRequestToTheme(ThemeRequest themeRequest) {
+        if ( themeRequest == null ) {
+            return null;
+        }
+
+        Long id = null;
+        String name = null;
+        List<String> keywords = null;
+
+        id = themeRequest.getId();
+        name = themeRequest.getName();
+        List<String> list = themeRequest.getKeywords();
+        if ( list != null ) {
+            keywords = new ArrayList<String>( list );
+        }
+
+        Theme theme = new Theme( id, name, keywords );
+
+        return theme;
+    }
+
+    protected List<Theme> themeRequestListToThemeList(List<ThemeRequest> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<Theme> list1 = new ArrayList<Theme>( list.size() );
+        for ( ThemeRequest themeRequest : list ) {
+            list1.add( themeRequestToTheme( themeRequest ) );
+        }
+
+        return list1;
+    }
+
+    protected EditorResponse editorToEditorResponse(Editor editor) {
+        if ( editor == null ) {
+            return null;
+        }
+
+        Long id = null;
+        String name = null;
+        String category = null;
+        String edition = null;
+
+        id = editor.getId();
+        name = editor.getName();
+        category = editor.getCategory();
+        edition = editor.getEdition();
+
+        List<BookResponse> books = null;
+
+        EditorResponse editorResponse = new EditorResponse( id, name, category, edition, books );
+
+        return editorResponse;
+    }
+
+    protected LibraryResponse libraryToLibraryResponse(Library library) {
+        if ( library == null ) {
+            return null;
+        }
+
+        LibraryResponse libraryResponse = new LibraryResponse();
+
+        libraryResponse.setId( library.getId() );
+        libraryResponse.setName( library.getName() );
+        libraryResponse.setLocation( library.getLocation() );
+        libraryResponse.setCapacity( library.getCapacity() );
+
+        return libraryResponse;
+    }
+
+    protected ThemeResponse themeToThemeResponse(Theme theme) {
+        if ( theme == null ) {
+            return null;
+        }
+
+        Long id = null;
+        String name = null;
+        List<String> keywords = null;
+
+        id = theme.getId();
+        name = theme.getName();
+        List<String> list = theme.getKeywords();
+        if ( list != null ) {
+            keywords = new ArrayList<String>( list );
+        }
+
+        List<BookResponse> books = null;
+
+        ThemeResponse themeResponse = new ThemeResponse( id, name, keywords, books );
+
+        return themeResponse;
+    }
+
+    protected List<ThemeResponse> themeListToThemeResponseList(List<Theme> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<ThemeResponse> list1 = new ArrayList<ThemeResponse>( list.size() );
+        for ( Theme theme : list ) {
+            list1.add( themeToThemeResponse( theme ) );
+        }
+
+        return list1;
+    }
+
+    protected OwnerResponse ownerToOwnerResponse(Owner owner) {
+        if ( owner == null ) {
+            return null;
+        }
+
+        OwnerResponse ownerResponse = new OwnerResponse();
+
+        ownerResponse.setId( owner.getId() );
+        ownerResponse.setFirstName( owner.getFirstName() );
+        ownerResponse.setLastName( owner.getLastName() );
+        ownerResponse.setNote( owner.getNote() );
+
+        return ownerResponse;
     }
 }

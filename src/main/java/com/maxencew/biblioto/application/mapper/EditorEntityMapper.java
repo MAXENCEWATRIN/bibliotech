@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface EditorEntityMapper {
 
+    @Mapping(target = "books", ignore = true)
     @Mapping(target = "id", ignore = true)
     EditorEntity toEntity(Editor editor);
 

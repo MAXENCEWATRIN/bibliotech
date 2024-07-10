@@ -14,6 +14,7 @@ public interface EditorDtoMapper {
     @Mapping(target = "id", ignore = true)
     Editor toDomain(EditorRequest request);
 
+    @Mapping(target = "books", ignore = true)
     EditorResponse toDto(Editor editor);
 
     List<Editor> toDomainList(List<EditorRequest> editorRequests);

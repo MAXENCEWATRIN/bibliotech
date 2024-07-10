@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ThemeEntityMapper {
 
+    @Mapping(target = "books", ignore = true)
     @Mapping(target = "id", ignore = true)
     ThemeEntity toEntity(Theme theme);
 

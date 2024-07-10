@@ -1,17 +1,14 @@
 package com.maxencew.biblioto.application.request;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ThemeRequest {
 
     private Long id;

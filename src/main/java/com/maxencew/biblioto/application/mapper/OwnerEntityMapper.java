@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface OwnerEntityMapper {
 
+    @Mapping(target = "books", ignore = true)
     @Mapping(target = "id", ignore = true)
     OwnerEntity toEntity(Owner owner);
 

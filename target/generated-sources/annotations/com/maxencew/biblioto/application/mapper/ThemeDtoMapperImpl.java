@@ -1,6 +1,7 @@
 package com.maxencew.biblioto.application.mapper;
 
 import com.maxencew.biblioto.application.request.ThemeRequest;
+import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.response.ThemeResponse;
 import com.maxencew.biblioto.domain.model.Theme;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T00:17:21+0200",
+    date = "2024-07-10T02:46:28+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -55,7 +56,9 @@ public class ThemeDtoMapperImpl implements ThemeDtoMapper {
             keywords = new ArrayList<String>( list );
         }
 
-        ThemeResponse themeResponse = new ThemeResponse( id, name, keywords );
+        List<BookResponse> books = null;
+
+        ThemeResponse themeResponse = new ThemeResponse( id, name, keywords, books );
 
         return themeResponse;
     }

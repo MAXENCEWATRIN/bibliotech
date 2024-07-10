@@ -1,6 +1,7 @@
 package com.maxencew.biblioto.application.mapper;
 
 import com.maxencew.biblioto.application.request.EditorRequest;
+import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.response.EditorResponse;
 import com.maxencew.biblioto.domain.model.Editor;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T00:17:21+0200",
+    date = "2024-07-10T02:46:28+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -26,6 +27,7 @@ public class EditorDtoMapperImpl implements EditorDtoMapper {
 
         editor.name( request.getName() );
         editor.category( request.getCategory() );
+        editor.edition( request.getEdition() );
 
         return editor.build();
     }
@@ -36,13 +38,19 @@ public class EditorDtoMapperImpl implements EditorDtoMapper {
             return null;
         }
 
+        Long id = null;
         String name = null;
         String category = null;
+        String edition = null;
 
+        id = editor.getId();
         name = editor.getName();
         category = editor.getCategory();
+        edition = editor.getEdition();
 
-        EditorResponse editorResponse = new EditorResponse( name, category );
+        List<BookResponse> books = null;
+
+        EditorResponse editorResponse = new EditorResponse( id, name, category, edition, books );
 
         return editorResponse;
     }

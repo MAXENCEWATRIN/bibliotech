@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T00:17:21+0200",
+    date = "2024-07-10T02:46:28+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -24,14 +24,16 @@ public class EditorEntityMapperImpl implements EditorEntityMapper {
 
         String name = null;
         String category = null;
+        String edition = null;
 
         name = editor.getName();
         category = editor.getCategory();
+        edition = editor.getEdition();
 
-        Long id = null;
         List<BookEntity> books = null;
+        Long id = null;
 
-        EditorEntity editorEntity = new EditorEntity( id, name, category, books );
+        EditorEntity editorEntity = new EditorEntity( id, name, category, edition, books );
 
         return editorEntity;
     }
@@ -47,6 +49,7 @@ public class EditorEntityMapperImpl implements EditorEntityMapper {
         editor1.id( editor.getId() );
         editor1.name( editor.getName() );
         editor1.category( editor.getCategory() );
+        editor1.edition( editor.getEdition() );
 
         return editor1.build();
     }

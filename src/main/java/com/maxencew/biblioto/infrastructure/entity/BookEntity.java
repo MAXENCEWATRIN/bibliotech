@@ -13,7 +13,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "BOOKS")
+@Entity
+@Table(name = "BOOKS", uniqueConstraints = {@UniqueConstraint(columnNames = {"id", "isbnId"})})
 public class BookEntity extends BaseEntity {
 
     @Id
@@ -36,18 +37,18 @@ public class BookEntity extends BaseEntity {
     private String initialLanguage;
     private Integer firstPublishYear;
     private String firstSentence;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "editor_id")
     private EditorEntity editor;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "library_id")
     private LibraryEntity library;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     private OwnerEntity owner;
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
     private List<ThemeEntity> themes;
-    private Boolean isWishLists;
+    private Boolean isWishList;
     private Boolean isAnOpenLibaryApiRegister;
     private Boolean isAnOpenLibaryApiBookValidate;
 

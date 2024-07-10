@@ -14,6 +14,7 @@ public interface ThemeDtoMapper {
     @Mapping(target = "id", ignore = true)
     Theme toDomain(ThemeRequest request);
 
+    @Mapping(target = "books", ignore = true)
     ThemeResponse toDto(Theme theme);
 
     List<Theme> toDomainList(List<ThemeRequest> themeRequests);
