@@ -1,21 +1,16 @@
 package com.maxencew.biblioto.application.service.adapter;
 
 import com.maxencew.biblioto.application.response.ChatGptSummariseBookPattern;
-import com.maxencew.biblioto.application.response.EditorResponse;
-import com.maxencew.biblioto.application.response.isbn.BookIsbnResponse;
 import com.maxencew.biblioto.application.service.IsbnService;
 import com.maxencew.biblioto.application.service.api.BookService;
 import com.maxencew.biblioto.application.service.api.OpenAIService;
 import com.maxencew.biblioto.domain.model.Book;
-import com.maxencew.biblioto.domain.model.Library;
 import com.maxencew.biblioto.domain.ports.spi.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.apache.bcel.generic.LOOKUPSWITCH;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -85,10 +80,13 @@ public class BookServiceAdapter implements BookService {
             LOGGER.info("ISBN ID returned information from the book");
             LOGGER.info("Contact with ChatGPT API to add some information to the book.");
             final ChatGptSummariseBookPattern complementaryInformations =
-                    openAIService.getChatGptResponse(book.getTitle(), book.getAuthorName());
+                    openAIService.getBookInformation(book.getTitle(), book.getAuthorName());
             book.setSynopsis(complementaryInformations.getSynopsis());
             book.setSummary(complementaryInformations.getSummary());
-            //TODO : implémenter les retours positif negatif etc
+            book.setOverallReception(complementaryInformations.getPublicOpinions().getOverallReception());
+            book.setCriticisms(complementaryInformations.getPublicOpinions().getCriticisms());
+            book.setPraises(complementaryInformations.getPublicOpinions().getPraises());
+            LOGGER.info("All complementary information had been successfully retrieved.");
             return book;
         }
 

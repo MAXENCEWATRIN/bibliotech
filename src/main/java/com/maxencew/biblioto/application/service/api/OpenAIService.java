@@ -4,6 +4,6 @@ import com.maxencew.biblioto.application.response.ChatGptSummariseBookPattern;
 
 public interface OpenAIService {
 
-    ChatGptSummariseBookPattern getChatGptResponse(final String bookName, final String author);
+    ChatGptSummariseBookPattern getBookInformation(final String bookName, final String author);
 
 }

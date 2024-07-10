@@ -16,16 +16,37 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
 public class OpenAIAdapter implements OpenAIService {
 
+    public static final String USER_PROMPT_CONTENT = "Please, respond with a Json Format respecting the information below, your response must be interpretate by a java API resource :\n" +
+            "\n" +
+            "I'd like to have a \"summary\" (Less than 500 words), a \"synopsis\"  (Less than 500 words) and a paragraph   summarizing the  public opinions of the book \"The lord of the rings\" of the author name \"Tolkien\". You can split the publicOpinions paragraphe with a part named \"overallReception\", an other named \"criticisms\" and finally \"criticisms\".\n" +
+            "\n" +
+            "Finally, an example of the json format you always must respect when your answer :\n" +
+            "\n" +
+            "\n" +
+            "```json\n" +
+            "{\n" +
+            "  \"summary\": \"exemple\",\n" +
+            "  \"synopsis\": \"exemple\"\n" +
+            "  \"publicOpinions\": {\n" +
+            "    \"overallReception\": \"\"exemple\"\",\n" +
+            "    \"praises\": \"exemple\",\n" +
+            "    \"criticisms\": \"exemple\"\n" +
+            "  }\n" +
+            "}\n" +
+            "```";
+    public static final String SYSTEM_PROMPT_CONTENT = "You are a library assistant, your role is to create relevant summaries and condense the opinions of the literary community.";
+
     private ExternalApiConfiguration externalApiConfiguration;
     private AppConfig appConfig;
 
     @Override
-    public ChatGptSummariseBookPattern getChatGptResponse(final String bookName, final String author) {
+    public ChatGptSummariseBookPattern getBookInformation(final String bookName, final String author) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
         headers.set("Authorization", "Bearer " + externalApiConfiguration.getOpenAIApiKey());
@@ -34,8 +55,11 @@ public class OpenAIAdapter implements OpenAIService {
                 .exchange(externalApiConfiguration.getOpenAIUrl(), HttpMethod.POST,
                         getOpenAiRequestHttpEntity(headers), OpenAiResponse.class);
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(cleanJsonString(response.getBody().getChoices().get(0).getMessage().getContent()), ChatGptSummariseBookPattern.class);
+            if (Objects.nonNull(response.getBody()) && !response.getBody().getChoices().isEmpty()) {
+                return new ObjectMapper().readValue(cleanJsonString(response.getBody()
+                        .getChoices().getFirst().getMessage().getContent()), ChatGptSummariseBookPattern.class);
+            }
+           throw new IllegalArgumentException("OpenAI Api respond with an empty body.");
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -43,25 +67,8 @@ public class OpenAIAdapter implements OpenAIService {
 
     private static HttpEntity<OpenAiRequest> getOpenAiRequestHttpEntity(HttpHeaders headers) {
         OpenAiRequest request = new OpenAiRequest(
-                "gpt-3.5-turbo", List.of(new OpenAiRequest.Message("system", "You are a library assistant, your role is to create relevant summaries and condense the opinions of the literary community."),
-                new OpenAiRequest.Message("user",  "Please, respond with a Json Format respecting the information below, your response must be interpretate by a java API resource :\n" +
-                        "\n" +
-                        "I'd like to have a \"summary\" (Less than 500 words), a \"synopsis\"  (Less than 500 words) and a paragraph   summarizing the  public opinions of the book \"The lord of the rings\" of the author name \"Tolkien\". You can split the publicOpinions paragraphe with a part named \"overallReception\", an other named \"criticisms\" and finally \"criticisms\".\n" +
-                        "\n" +
-                        "Finally, an example of the json format you always must respect when your answer :\n" +
-                        "\n" +
-                        "\n" +
-                        "```json\n" +
-                        "{\n" +
-                        "  \"summary\": \"exemple\",\n" +
-                        "  \"synopsis\": \"exemple\"\n" +
-                        "  \"publicOpinions\": {\n" +
-                        "    \"overallReception\": \"\"exemple\"\",\n" +
-                        "    \"praises\": \"exemple\",\n" +
-                        "    \"criticisms\": \"exemple\"\n" +
-                        "  }\n" +
-                        "}\n" +
-                        "```"))
+                "gpt-3.5-turbo", List.of(new OpenAiRequest.Message("system", SYSTEM_PROMPT_CONTENT),
+                new OpenAiRequest.Message("user", USER_PROMPT_CONTENT))
 
         );
 

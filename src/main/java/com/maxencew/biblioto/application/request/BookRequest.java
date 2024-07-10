@@ -33,6 +33,9 @@ public class BookRequest {
     private List<ThemeRequest> themes;
     private OwnerRequest owner;
     private Boolean isWishList;
+    private String overallReception;
+    private String praises;
+    private String criticisms;
     private Boolean isAnOpenLibaryApiRegister;
     private Boolean isAnOpenLibaryApiBookValidate;
 

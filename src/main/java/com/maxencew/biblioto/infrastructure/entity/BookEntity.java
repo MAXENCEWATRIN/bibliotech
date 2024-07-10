@@ -48,6 +48,9 @@ public class BookEntity extends BaseEntity {
     private OwnerEntity owner;
     @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
     private List<ThemeEntity> themes;
+    private String overallReception;
+    private String praises;
+    private String criticisms;
     private Boolean isWishList;
     private Boolean isAnOpenLibaryApiRegister;
     private Boolean isAnOpenLibaryApiBookValidate;

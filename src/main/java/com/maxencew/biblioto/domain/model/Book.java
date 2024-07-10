@@ -1,5 +1,6 @@
 package com.maxencew.biblioto.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.maxencew.biblioto.application.request.ThemeRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,9 @@ public class Book {
     private Library library;
     private Owner owner;
     private List<Theme> themes;
+    private String overallReception;
+    private String praises;
+    private String criticisms;
     private Boolean isWishList;
     private Boolean isAnOpenLibaryApiRegister;
     private Boolean isAnOpenLibaryApiBookValidate;

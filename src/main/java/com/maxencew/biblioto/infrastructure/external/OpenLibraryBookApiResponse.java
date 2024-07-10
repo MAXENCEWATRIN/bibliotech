@@ -2,10 +2,10 @@ package com.maxencew.biblioto.infrastructure.external;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.maxencew.biblioto.domain.model.Book;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Data;
 
 import java.util.List;
 import java.util.Map;

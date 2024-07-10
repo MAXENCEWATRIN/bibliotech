@@ -37,6 +37,9 @@ public class BookResponse {
     private List<ThemeResponse> themes;
     private OwnerResponse owner;
     private Boolean isWishList;
+    private String overallReception;
+    private String praises;
+    private String criticisms;
     private Boolean isAnOpenLibaryApiRegister;
     private Boolean isAnOpenLibaryApiBookValidate;
 
