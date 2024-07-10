@@ -12,7 +12,6 @@ import java.util.List;
 public interface ThemeEntityMapper {
 
     @Mapping(target = "books", ignore = true)
-    @Mapping(target = "id", ignore = true)
     ThemeEntity toEntity(Theme theme) throws MappingEntityException; 
 
     Theme toDomain(ThemeEntity theme) throws MappingEntityException; 

@@ -1,6 +1,6 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
-import com.maxencew.biblioto.application.mapper.OpenLibraryBookMapper;
+import com.maxencew.biblioto.application.mapper.dto.OpenLibraryBookMapper;
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.domain.model.Editor;
 import com.maxencew.biblioto.domain.ports.spi.OpenLibraryApiPort;

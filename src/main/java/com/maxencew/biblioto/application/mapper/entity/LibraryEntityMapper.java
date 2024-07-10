@@ -12,7 +12,6 @@ import java.util.List;
 public interface LibraryEntityMapper {
 
     @Mapping(target = "books", ignore = true)
-    @Mapping(target = "id", ignore = true)
     LibraryEntity toEntity(Library library) throws MappingEntityException;
 
     Library toDomain(LibraryEntity libraryEntity) throws MappingEntityException; 

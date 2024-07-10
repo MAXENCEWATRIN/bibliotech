@@ -12,7 +12,6 @@ import java.util.List;
 public interface OwnerEntityMapper {
 
     @Mapping(target = "books", ignore = true)
-    @Mapping(target = "id", ignore = true)
     OwnerEntity toEntity(Owner owner) throws MappingEntityException; 
 
     Owner toDomain(OwnerEntity ownerEntity) throws MappingEntityException; 

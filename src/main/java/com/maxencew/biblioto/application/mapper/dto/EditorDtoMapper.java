@@ -12,7 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface EditorDtoMapper {
 
-    @Mapping(target = "id", ignore = true)
     Editor toDomain(EditorRequest request) throws MappingDtoException;
 
     @Mapping(target = "books", ignore = true)

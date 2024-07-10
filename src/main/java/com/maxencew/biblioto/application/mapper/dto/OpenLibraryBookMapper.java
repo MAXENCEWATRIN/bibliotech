@@ -1,7 +1,6 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.dto;
 
 import com.maxencew.biblioto.application.exception.MappingException;
-import com.maxencew.biblioto.application.mapper.dto.EditorDtoMapper;
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.infrastructure.external.OpenLibraryBookApiResponse;
 import org.mapstruct.Mapper;

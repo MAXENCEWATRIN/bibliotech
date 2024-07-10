@@ -12,7 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface OwnerDtoMapper {
 
-    @Mapping(target = "id", ignore = true)
     Owner toDomain(OwnerRequest request) throws MappingDtoException; 
 
     @Mapping(target = "books", ignore = true)

@@ -12,7 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface LibraryDtoMapper {
 
-    @Mapping(target = "id", ignore = true)
     Library toDomain(LibraryRequest request) throws MappingDtoException; 
 
     @Mapping(target = "books", ignore = true)

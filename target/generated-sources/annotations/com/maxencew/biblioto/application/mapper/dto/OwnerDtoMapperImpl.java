@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T22:24:25+0200",
+    date = "2024-07-11T00:26:55+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -23,15 +23,15 @@ public class OwnerDtoMapperImpl implements OwnerDtoMapper {
             return null;
         }
 
+        Long id = null;
         String firstName = null;
         String lastName = null;
         String note = null;
 
+        id = request.getId();
         firstName = request.getFirstName();
         lastName = request.getLastName();
         note = request.getNote();
-
-        Long id = null;
 
         Owner owner = new Owner( id, firstName, lastName, note );
 

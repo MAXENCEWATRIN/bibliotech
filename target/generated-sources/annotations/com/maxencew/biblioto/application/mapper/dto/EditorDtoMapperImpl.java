@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T22:24:25+0200",
+    date = "2024-07-11T00:26:55+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -26,6 +26,7 @@ public class EditorDtoMapperImpl implements EditorDtoMapper {
 
         Editor.EditorBuilder editor = Editor.builder();
 
+        editor.id( request.getId() );
         editor.name( request.getName() );
         editor.category( request.getCategory() );
         editor.edition( request.getEdition() );

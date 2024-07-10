@@ -12,7 +12,6 @@ import java.util.List;
 public interface EditorEntityMapper {
 
     @Mapping(target = "books", ignore = true)
-    @Mapping(target = "id", ignore = true)
     EditorEntity toEntity(Editor editor) throws MappingEntityException;
 
     Editor toDomain(EditorEntity editor) throws MappingEntityException; 

@@ -12,7 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ThemeDtoMapper {
 
-    @Mapping(target = "id", ignore = true)
     Theme toDomain(ThemeRequest request) throws MappingDtoException; 
 
     @Mapping(target = "books", ignore = true)
