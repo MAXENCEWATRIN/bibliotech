@@ -5,6 +5,7 @@ import com.maxencew.biblioto.application.request.BookRequest;
 import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
 import com.maxencew.biblioto.application.service.api.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,12 @@ public class BookController {
     private BookDtoMapper bookDtoMapper;
 
     @PostMapping
-    public BibliotoHttpResponse<BookResponse> addBook(@RequestBody BookRequest book) {
+    public BibliotoHttpResponse<BookResponse> addBook(@Valid @RequestBody BookRequest book) {
         return BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.addBook(bookDtoMapper.toDomain(book))));
     }
 
     @PutMapping("/{id}")
-    public BibliotoHttpResponse<BookResponse> updateBook(@PathVariable Long id, @RequestBody BookRequest book) {
+    public BibliotoHttpResponse<BookResponse> updateBook(@PathVariable Long id, @Valid @RequestBody BookRequest book) {
         book.setId(id);
         return BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.addBook(bookDtoMapper.toDomain(book))));
     }

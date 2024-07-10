@@ -5,6 +5,7 @@ import com.maxencew.biblioto.application.request.OwnerRequest;
 import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
 import com.maxencew.biblioto.application.response.OwnerResponse;
 import com.maxencew.biblioto.application.service.api.OwnerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,12 @@ public class OwnerController {
     OwnerDtoMapper ownerDtoMapper;
 
     @PostMapping
-    public BibliotoHttpResponse<OwnerResponse> addOwner(@RequestBody OwnerRequest owner) {
+    public BibliotoHttpResponse<OwnerResponse> addOwner(@Valid @RequestBody OwnerRequest owner) {
         return BibliotoHttpResponse.success(ownerDtoMapper.toDto(ownerServiceAdapter.addOwner(ownerDtoMapper.toDomain(owner))));
     }
 
     @PutMapping("/{id}")
-    public BibliotoHttpResponse<OwnerResponse> updateOwner(@PathVariable Long id, @RequestBody OwnerRequest owner) {
+    public BibliotoHttpResponse<OwnerResponse> updateOwner(@PathVariable Long id, @Valid @RequestBody OwnerRequest owner) {
         owner.setId(id);
         return BibliotoHttpResponse.success(ownerDtoMapper.toDto(ownerServiceAdapter.addOwner(ownerDtoMapper.toDomain(owner))));
     }

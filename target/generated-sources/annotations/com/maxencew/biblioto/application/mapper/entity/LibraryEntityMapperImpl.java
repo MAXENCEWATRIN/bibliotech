@@ -1,8 +1,7 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.entity;
 
-import com.maxencew.biblioto.application.mapper.entity.LibraryEntityMapper;
+import com.maxencew.biblioto.application.exception.MappingEntityException;
 import com.maxencew.biblioto.domain.model.Library;
-import com.maxencew.biblioto.infrastructure.entity.BookEntity;
 import com.maxencew.biblioto.infrastructure.entity.LibraryEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,36 +10,29 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:28+0200",
+    date = "2024-07-10T22:24:26+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class LibraryEntityMapperImpl implements LibraryEntityMapper {
 
     @Override
-    public LibraryEntity toEntity(Library library) {
+    public LibraryEntity toEntity(Library library) throws MappingEntityException {
         if ( library == null ) {
             return null;
         }
 
-        String name = null;
-        String location = null;
-        Integer capacity = null;
+        LibraryEntity libraryEntity = new LibraryEntity();
 
-        name = library.getName();
-        location = library.getLocation();
-        capacity = library.getCapacity();
-
-        List<BookEntity> books = null;
-        Long id = null;
-
-        LibraryEntity libraryEntity = new LibraryEntity( id, name, location, capacity, books );
+        libraryEntity.setName( library.getName() );
+        libraryEntity.setLocation( library.getLocation() );
+        libraryEntity.setCapacity( library.getCapacity() );
 
         return libraryEntity;
     }
 
     @Override
-    public Library toDomain(LibraryEntity libraryEntity) {
+    public Library toDomain(LibraryEntity libraryEntity) throws MappingEntityException {
         if ( libraryEntity == null ) {
             return null;
         }
@@ -61,7 +53,7 @@ public class LibraryEntityMapperImpl implements LibraryEntityMapper {
     }
 
     @Override
-    public List<Library> toDomainList(List<LibraryEntity> entities) {
+    public List<Library> toDomainList(List<LibraryEntity> entities) throws MappingEntityException {
         if ( entities == null ) {
             return null;
         }
@@ -75,7 +67,7 @@ public class LibraryEntityMapperImpl implements LibraryEntityMapper {
     }
 
     @Override
-    public List<LibraryEntity> toEntityList(List<Library> libraries) {
+    public List<LibraryEntity> toEntityList(List<Library> libraries) throws MappingEntityException {
         if ( libraries == null ) {
             return null;
         }

@@ -16,7 +16,11 @@ public class BibliotoHttpResponse<T> {
         return new BibliotoHttpResponse<>(true, data, null);
     }
 
-    public static <T> BibliotoHttpResponse<T> error(String error) {
-        return new BibliotoHttpResponse<>(false, null, error);
+    public static <T> BibliotoHttpResponse<T> error(String error, T data) {
+        return new BibliotoHttpResponse<>(false, data, error);
+    }
+
+    public static <T> BibliotoHttpResponse<T> validationExpectation(T data, String error) {
+        return new BibliotoHttpResponse<>(false, data, error);
     }
 }

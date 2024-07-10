@@ -1,6 +1,6 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.dto;
 
-import com.maxencew.biblioto.application.mapper.dto.LibraryDtoMapper;
+import com.maxencew.biblioto.application.exception.MappingDtoException;
 import com.maxencew.biblioto.application.request.LibraryRequest;
 import com.maxencew.biblioto.application.response.LibraryResponse;
 import com.maxencew.biblioto.domain.model.Library;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:28+0200",
+    date = "2024-07-10T22:24:25+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class LibraryDtoMapperImpl implements LibraryDtoMapper {
 
     @Override
-    public Library toDomain(LibraryRequest request) {
+    public Library toDomain(LibraryRequest request) throws MappingDtoException {
         if ( request == null ) {
             return null;
         }
@@ -39,7 +39,7 @@ public class LibraryDtoMapperImpl implements LibraryDtoMapper {
     }
 
     @Override
-    public LibraryResponse toDto(Library library) {
+    public LibraryResponse toDto(Library library) throws MappingDtoException {
         if ( library == null ) {
             return null;
         }
@@ -55,7 +55,7 @@ public class LibraryDtoMapperImpl implements LibraryDtoMapper {
     }
 
     @Override
-    public List<Library> toDomainList(List<LibraryRequest> librariesRequested) {
+    public List<Library> toDomainList(List<LibraryRequest> librariesRequested) throws MappingDtoException {
         if ( librariesRequested == null ) {
             return null;
         }
@@ -69,7 +69,7 @@ public class LibraryDtoMapperImpl implements LibraryDtoMapper {
     }
 
     @Override
-    public List<LibraryResponse> toDtoList(List<Library> libraries) {
+    public List<LibraryResponse> toDtoList(List<Library> libraries) throws MappingDtoException {
         if ( libraries == null ) {
             return null;
         }

@@ -3,6 +3,8 @@ package com.maxencew.biblioto.infrastructure.adapter;
 import com.maxencew.biblioto.application.mapper.entity.EditorEntityMapper;
 import com.maxencew.biblioto.domain.model.Editor;
 import com.maxencew.biblioto.domain.ports.spi.EditorPersistencePort;
+import com.maxencew.biblioto.infrastructure.entity.EditorEntity;
+import com.maxencew.biblioto.infrastructure.exception.AppPersistenceException;
 import com.maxencew.biblioto.infrastructure.repository.EditorRepository;
 import org.springframework.stereotype.Component;
 
@@ -21,22 +23,46 @@ public class EditorPersistenceAdapter implements EditorPersistencePort {
 
     @Override
     public Editor addEditor(Editor editor) {
-       return  editorEntityMapper.toDomain(editorRepository.save(editorEntityMapper.toEntity(editor)));
+        EditorEntity editorEntity = editorEntityMapper.toEntity(editor);
+        EditorEntity persistedEditor;
+        try {
+            persistedEditor = editorRepository.save(editorEntity);
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
+        return  editorEntityMapper.toDomain(persistedEditor);
     }
 
     @Override
     public void removeEditor(Editor editor) {
-        editorRepository.delete(editorEntityMapper.toEntity(editor));
+        EditorEntity editorEntity = editorEntityMapper.toEntity(editor);
+        try {
+            editorRepository.delete(editorEntity);
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
     }
 
     @Override
     public List<Editor> getEditors() {
-       return editorEntityMapper.toDomainList(editorRepository.findAll());
+        List<EditorEntity> editors;
+        try {
+            editors = editorRepository.findAll();
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
+        return editorEntityMapper.toDomainList(editors);
     }
 
     @Override
     public Editor getEditorById(Long editorId) {
-        return editorEntityMapper.toDomain(this.editorRepository.getReferenceById(editorId));
+        EditorEntity referenceById;
+        try {
+            referenceById = this.editorRepository.getReferenceById(editorId);
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
+        return editorEntityMapper.toDomain(referenceById);
     }
 
 }

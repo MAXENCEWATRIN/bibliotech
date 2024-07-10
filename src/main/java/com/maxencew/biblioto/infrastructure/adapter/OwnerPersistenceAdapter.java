@@ -3,6 +3,8 @@ package com.maxencew.biblioto.infrastructure.adapter;
 import com.maxencew.biblioto.application.mapper.entity.OwnerEntityMapper;
 import com.maxencew.biblioto.domain.model.Owner;
 import com.maxencew.biblioto.domain.ports.spi.OwnerPersistencePort;
+import com.maxencew.biblioto.infrastructure.entity.OwnerEntity;
+import com.maxencew.biblioto.infrastructure.exception.AppPersistenceException;
 import com.maxencew.biblioto.infrastructure.repository.OwnerRepository;
 import org.springframework.stereotype.Component;
 
@@ -21,22 +23,46 @@ public class OwnerPersistenceAdapter implements OwnerPersistencePort {
 
     @Override
     public Owner addOwner(Owner owner) {
-       return  ownerEntityMapper.toDomain(ownerRepository.save(ownerEntityMapper.toEntity(owner)));
+        OwnerEntity ownerEntity = ownerEntityMapper.toEntity(owner);
+        OwnerEntity persistedOwner;
+        try {
+            persistedOwner = ownerRepository.save(ownerEntity);
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
+        return  ownerEntityMapper.toDomain(persistedOwner);
     }
 
     @Override
     public void removeOwner(Owner owner) {
-        ownerRepository.delete(ownerEntityMapper.toEntity(owner));
+        OwnerEntity ownerEntity = ownerEntityMapper.toEntity(owner);
+        try {
+            ownerRepository.delete(ownerEntity);
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
     }
 
     @Override
     public List<Owner> getOwners() {
-       return ownerEntityMapper.toDomainList(ownerRepository.findAll());
+        List<OwnerEntity> ownerEntities;
+        try {
+            ownerEntities = ownerRepository.findAll();
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
+        return ownerEntityMapper.toDomainList(ownerEntities);
     }
 
     @Override
     public Owner getOwnerById(Long ownerId) {
-        return ownerEntityMapper.toDomain(this.ownerRepository.getReferenceById(ownerId));
+        OwnerEntity referenceById;
+        try {
+            referenceById = this.ownerRepository.getReferenceById(ownerId);
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
+        return ownerEntityMapper.toDomain(referenceById);
     }
 
 }

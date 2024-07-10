@@ -5,6 +5,7 @@ import com.maxencew.biblioto.application.request.EditorRequest;
 import com.maxencew.biblioto.application.response.EditorResponse;
 import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
 import com.maxencew.biblioto.application.service.api.EditorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,12 @@ public class EditorController {
     private EditorDtoMapper editorDtoMapper;
 
     @PostMapping
-    public BibliotoHttpResponse<EditorResponse> addEditor(@RequestBody EditorRequest editor) {
+    public BibliotoHttpResponse<EditorResponse> addEditor(@Valid @RequestBody EditorRequest editor) {
         return BibliotoHttpResponse.success(editorDtoMapper.toDto(editorServiceAdapter.addEditor(editorDtoMapper.toDomain(editor))));
     }
 
     @PutMapping("/{id}")
-    public BibliotoHttpResponse<EditorResponse> updateEditor(@PathVariable Long id, @RequestBody EditorRequest editor) {
+    public BibliotoHttpResponse<EditorResponse> updateEditor(@Valid @PathVariable Long id, @RequestBody EditorRequest editor) {
         editor.setId(id);
         return BibliotoHttpResponse.success(editorDtoMapper.toDto(editorServiceAdapter.addEditor(editorDtoMapper.toDomain(editor))));
     }

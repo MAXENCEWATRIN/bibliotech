@@ -5,4 +5,8 @@ public class ExternalRessourcesCommunicationException extends RuntimeException {
         super(message);
     }
 
+    public ExternalRessourcesCommunicationException(String message, Throwable throwable) {
+        super(message, throwable);
+    }
+
 }

@@ -5,6 +5,7 @@ import com.maxencew.biblioto.application.request.ThemeRequest;
 import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
 import com.maxencew.biblioto.application.response.ThemeResponse;
 import com.maxencew.biblioto.application.service.api.ThemeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,12 @@ public class ThemeController {
     private ThemeDtoMapper themeDtoMapper;
 
     @PostMapping
-    public BibliotoHttpResponse<ThemeResponse> addTheme(@RequestBody ThemeRequest theme) {
+    public BibliotoHttpResponse<ThemeResponse> addTheme(@Valid @RequestBody ThemeRequest theme) {
         return BibliotoHttpResponse.success(themeDtoMapper.toDto(themeServiceAdapter.addTheme(themeDtoMapper.toDomain(theme))));
     }
 
     @PutMapping("/{id}")
-    public BibliotoHttpResponse<ThemeResponse> updateTheme(@PathVariable Long id, @RequestBody ThemeRequest theme) {
+    public BibliotoHttpResponse<ThemeResponse> updateTheme(@PathVariable Long id, @Valid @RequestBody ThemeRequest theme) {
         theme.setId(id);
         return BibliotoHttpResponse.success(themeDtoMapper.toDto(themeServiceAdapter.addTheme(themeDtoMapper.toDomain(theme))));
     }
