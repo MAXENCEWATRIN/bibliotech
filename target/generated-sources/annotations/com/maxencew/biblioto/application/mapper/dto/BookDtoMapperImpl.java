@@ -1,5 +1,6 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.dto;
 
+import com.maxencew.biblioto.application.exception.MappingDtoException;
 import com.maxencew.biblioto.application.request.BookRequest;
 import com.maxencew.biblioto.application.request.EditorRequest;
 import com.maxencew.biblioto.application.request.LibraryRequest;
@@ -23,20 +24,21 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:27+0200",
+    date = "2024-07-11T00:26:56+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class BookDtoMapperImpl implements BookDtoMapper {
 
     @Override
-    public Book toDomain(BookRequest request) {
+    public Book toDomain(BookRequest request) throws MappingDtoException {
         if ( request == null ) {
             return null;
         }
 
         Book.BookBuilder book = Book.builder();
 
+        book.id( request.getId() );
         book.isbnId( request.getIsbnId() );
         book.oldIsbnId( request.getOldIsbnId() );
         book.title( request.getTitle() );
@@ -56,6 +58,9 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         book.library( libraryRequestToLibrary( request.getLibrary() ) );
         book.owner( ownerRequestToOwner( request.getOwner() ) );
         book.themes( themeRequestListToThemeList( request.getThemes() ) );
+        book.overallReception( request.getOverallReception() );
+        book.praises( request.getPraises() );
+        book.criticisms( request.getCriticisms() );
         book.isWishList( request.getIsWishList() );
         book.isAnOpenLibaryApiRegister( request.getIsAnOpenLibaryApiRegister() );
         book.isAnOpenLibaryApiBookValidate( request.getIsAnOpenLibaryApiBookValidate() );
@@ -64,7 +69,7 @@ public class BookDtoMapperImpl implements BookDtoMapper {
     }
 
     @Override
-    public BookResponse toDto(Book book) {
+    public BookResponse toDto(Book book) throws MappingDtoException {
         if ( book == null ) {
             return null;
         }
@@ -90,6 +95,9 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         List<ThemeResponse> themes = null;
         OwnerResponse owner = null;
         Boolean isWishList = null;
+        String overallReception = null;
+        String praises = null;
+        String criticisms = null;
         Boolean isAnOpenLibaryApiRegister = null;
         Boolean isAnOpenLibaryApiBookValidate = null;
 
@@ -114,16 +122,19 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         themes = themeListToThemeResponseList( book.getThemes() );
         owner = ownerToOwnerResponse( book.getOwner() );
         isWishList = book.getIsWishList();
+        overallReception = book.getOverallReception();
+        praises = book.getPraises();
+        criticisms = book.getCriticisms();
         isAnOpenLibaryApiRegister = book.getIsAnOpenLibaryApiRegister();
         isAnOpenLibaryApiBookValidate = book.getIsAnOpenLibaryApiBookValidate();
 
-        BookResponse bookResponse = new BookResponse( id, isbnId, oldIsbnId, title, authorName, titleLong, subtitle, synopsis, summary, numberOfPage, openLibraryId, coverPageUrl, traductionLanguage, initialLanguage, firstPublishYear, firstSentence, editor, library, themes, owner, isWishList, isAnOpenLibaryApiRegister, isAnOpenLibaryApiBookValidate );
+        BookResponse bookResponse = new BookResponse( id, isbnId, oldIsbnId, title, authorName, titleLong, subtitle, synopsis, summary, numberOfPage, openLibraryId, coverPageUrl, traductionLanguage, initialLanguage, firstPublishYear, firstSentence, editor, library, themes, owner, isWishList, overallReception, praises, criticisms, isAnOpenLibaryApiRegister, isAnOpenLibaryApiBookValidate );
 
         return bookResponse;
     }
 
     @Override
-    public List<Book> toDomainList(List<BookRequest> booksRequested) {
+    public List<Book> toDomainList(List<BookRequest> booksRequested) throws MappingDtoException {
         if ( booksRequested == null ) {
             return null;
         }
@@ -137,7 +148,7 @@ public class BookDtoMapperImpl implements BookDtoMapper {
     }
 
     @Override
-    public List<BookResponse> toDtoList(List<Book> books) {
+    public List<BookResponse> toDtoList(List<Book> books) throws MappingDtoException {
         if ( books == null ) {
             return null;
         }

@@ -1,9 +1,9 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.dto;
 
+import com.maxencew.biblioto.application.exception.MappingException;
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.infrastructure.external.OpenLibraryBookApiResponse;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public interface OpenLibraryBookMapper {
 //    @Mapping(source = "title", target = "firstPublishYear")
 //    @Mapping(source = "title", target = "firstSentence")
 //    @Mapping(source = "title", target = "editorMapper")
-    Book toDomain(OpenLibraryBookApiResponse bookOpenLibrary);
+    Book toDomain(OpenLibraryBookApiResponse bookOpenLibrary) throws MappingException;
 
     @Named("mapAuthorToAuthorNameList")
     static List<String> mapAuthorToAuthorNameList(String author) {

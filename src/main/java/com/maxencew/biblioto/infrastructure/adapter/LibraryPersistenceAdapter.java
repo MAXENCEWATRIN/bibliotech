@@ -1,11 +1,13 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
-import com.maxencew.biblioto.application.mapper.LibraryEntityMapper;
+import com.maxencew.biblioto.application.exception.MappingEntityException;
+import com.maxencew.biblioto.application.mapper.entity.LibraryEntityMapper;
 import com.maxencew.biblioto.domain.model.Library;
 import com.maxencew.biblioto.domain.ports.spi.LibraryPersistencePort;
+import com.maxencew.biblioto.infrastructure.entity.LibraryEntity;
+import com.maxencew.biblioto.infrastructure.exception.AppPersistenceException;
 import com.maxencew.biblioto.infrastructure.repository.LibraryRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -22,22 +24,46 @@ public class LibraryPersistenceAdapter implements LibraryPersistencePort {
 
     @Override
     public Library addLibrary(Library library) {
-       return  libraryEntityMapper.toDomain(libraryRepository.save(libraryEntityMapper.toEntity(library)));
+        LibraryEntity libraryEntity = libraryEntityMapper.toEntity(library);
+        LibraryEntity persistedLibrary;
+        try {
+            persistedLibrary = libraryRepository.save(libraryEntity);
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
+        return  libraryEntityMapper.toDomain(persistedLibrary);
     }
 
+    //TODO : Dans toutes mes exceptions propager la cause correctement
     @Override
     public void removeLibrary(Library library) {
-        libraryRepository.delete(libraryEntityMapper.toEntity(library));
+        LibraryEntity libraryEntity = libraryEntityMapper.toEntity(library);
+        try {
+            libraryRepository.delete(libraryEntity);
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
     }
 
     @Override
     public List<Library> getLibrarys() {
-       return libraryEntityMapper.toDomainList(libraryRepository.findAll());
+        List<LibraryEntity> libraries = libraryRepository.findAll();
+        try {
+            return libraryEntityMapper.toDomainList(libraries);
+        } catch (MappingEntityException e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
     }
 
     @Override
     public Library getLibraryById(Long libraryId) {
-        return libraryEntityMapper.toDomain(this.libraryRepository.getReferenceById(libraryId));
+        LibraryEntity referenceById;
+        try {
+            referenceById = this.libraryRepository.getReferenceById(libraryId);
+        } catch (Exception e) {
+            throw new AppPersistenceException(e.getMessage(), e);
+        }
+        return libraryEntityMapper.toDomain(referenceById);
     }
 
 }

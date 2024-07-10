@@ -1,10 +1,11 @@
 package com.maxencew.biblioto.web.controller;
 
-import com.maxencew.biblioto.application.mapper.EditorDtoMapper;
+import com.maxencew.biblioto.application.mapper.dto.EditorDtoMapper;
 import com.maxencew.biblioto.application.request.EditorRequest;
 import com.maxencew.biblioto.application.response.EditorResponse;
-import com.maxencew.biblioto.application.service.adapter.EditorServiceAdapter;
+import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
 import com.maxencew.biblioto.application.service.api.EditorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,14 +22,14 @@ public class EditorController {
     private EditorDtoMapper editorDtoMapper;
 
     @PostMapping
-    public EditorResponse addEditor(@RequestBody EditorRequest editor) {
-        return editorDtoMapper.toDto(editorServiceAdapter.addEditor(editorDtoMapper.toDomain(editor)));
+    public BibliotoHttpResponse<EditorResponse> addEditor(@Valid @RequestBody EditorRequest editor) {
+        return BibliotoHttpResponse.success(editorDtoMapper.toDto(editorServiceAdapter.addEditor(editorDtoMapper.toDomain(editor))));
     }
 
     @PutMapping("/{id}")
-    public EditorResponse updateEditor(@PathVariable Long id, @RequestBody EditorRequest editor) {
+    public BibliotoHttpResponse<EditorResponse> updateEditor(@Valid @PathVariable Long id, @RequestBody EditorRequest editor) {
         editor.setId(id);
-        return editorDtoMapper.toDto(editorServiceAdapter.addEditor(editorDtoMapper.toDomain(editor)));
+        return BibliotoHttpResponse.success(editorDtoMapper.toDto(editorServiceAdapter.addEditor(editorDtoMapper.toDomain(editor))));
     }
 
     @DeleteMapping("/{id}")
@@ -38,13 +39,13 @@ public class EditorController {
     }
 
     @GetMapping
-    public List<EditorResponse> getAllEditors() {
-        return editorDtoMapper.toDtoList(editorServiceAdapter.getEditors());
+    public BibliotoHttpResponse<List<EditorResponse>> getAllEditors() {
+        return BibliotoHttpResponse.success(editorDtoMapper.toDtoList(editorServiceAdapter.getEditors()));
     }
 
     @GetMapping("/{id}")
-    public EditorResponse getEditorById(@PathVariable Long id) {
-        return editorDtoMapper.toDto(editorServiceAdapter.getEditorById(id));
+    public BibliotoHttpResponse<EditorResponse> getEditorById(@PathVariable Long id) {
+        return BibliotoHttpResponse.success(editorDtoMapper.toDto(editorServiceAdapter.getEditorById(id)));
     }
 
 }

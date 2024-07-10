@@ -1,5 +1,6 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.dto;
 
+import com.maxencew.biblioto.application.exception.MappingDtoException;
 import com.maxencew.biblioto.application.request.EditorRequest;
 import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.response.EditorResponse;
@@ -11,20 +12,21 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:28+0200",
+    date = "2024-07-11T00:26:55+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class EditorDtoMapperImpl implements EditorDtoMapper {
 
     @Override
-    public Editor toDomain(EditorRequest request) {
+    public Editor toDomain(EditorRequest request) throws MappingDtoException {
         if ( request == null ) {
             return null;
         }
 
         Editor.EditorBuilder editor = Editor.builder();
 
+        editor.id( request.getId() );
         editor.name( request.getName() );
         editor.category( request.getCategory() );
         editor.edition( request.getEdition() );
@@ -33,7 +35,7 @@ public class EditorDtoMapperImpl implements EditorDtoMapper {
     }
 
     @Override
-    public EditorResponse toDto(Editor editor) {
+    public EditorResponse toDto(Editor editor) throws MappingDtoException {
         if ( editor == null ) {
             return null;
         }
@@ -56,7 +58,7 @@ public class EditorDtoMapperImpl implements EditorDtoMapper {
     }
 
     @Override
-    public List<Editor> toDomainList(List<EditorRequest> editorRequests) {
+    public List<Editor> toDomainList(List<EditorRequest> editorRequests) throws MappingDtoException {
         if ( editorRequests == null ) {
             return null;
         }
@@ -70,7 +72,7 @@ public class EditorDtoMapperImpl implements EditorDtoMapper {
     }
 
     @Override
-    public List<EditorResponse> toDtoList(List<Editor> editors) {
+    public List<EditorResponse> toDtoList(List<Editor> editors) throws MappingDtoException {
         if ( editors == null ) {
             return null;
         }

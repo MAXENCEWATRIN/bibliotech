@@ -1,7 +1,7 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.entity;
 
+import com.maxencew.biblioto.application.exception.MappingEntityException;
 import com.maxencew.biblioto.domain.model.Theme;
-import com.maxencew.biblioto.infrastructure.entity.BookEntity;
 import com.maxencew.biblioto.infrastructure.entity.ThemeEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,37 +10,32 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:28+0200",
+    date = "2024-07-11T00:30:10+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class ThemeEntityMapperImpl implements ThemeEntityMapper {
 
     @Override
-    public ThemeEntity toEntity(Theme theme) {
+    public ThemeEntity toEntity(Theme theme) throws MappingEntityException {
         if ( theme == null ) {
             return null;
         }
 
-        String name = null;
-        List<String> keywords = null;
+        ThemeEntity themeEntity = new ThemeEntity();
 
-        name = theme.getName();
+        themeEntity.setId( theme.getId() );
+        themeEntity.setName( theme.getName() );
         List<String> list = theme.getKeywords();
         if ( list != null ) {
-            keywords = new ArrayList<String>( list );
+            themeEntity.setKeywords( new ArrayList<String>( list ) );
         }
-
-        List<BookEntity> books = null;
-        Long id = null;
-
-        ThemeEntity themeEntity = new ThemeEntity( id, name, keywords, books );
 
         return themeEntity;
     }
 
     @Override
-    public Theme toDomain(ThemeEntity theme) {
+    public Theme toDomain(ThemeEntity theme) throws MappingEntityException {
         if ( theme == null ) {
             return null;
         }
@@ -62,7 +57,7 @@ public class ThemeEntityMapperImpl implements ThemeEntityMapper {
     }
 
     @Override
-    public List<Theme> toDomainList(List<ThemeEntity> entities) {
+    public List<Theme> toDomainList(List<ThemeEntity> entities) throws MappingEntityException {
         if ( entities == null ) {
             return null;
         }
@@ -76,7 +71,7 @@ public class ThemeEntityMapperImpl implements ThemeEntityMapper {
     }
 
     @Override
-    public List<ThemeEntity> toEntityList(List<Theme> themes) {
+    public List<ThemeEntity> toEntityList(List<Theme> themes) throws MappingEntityException {
         if ( themes == null ) {
             return null;
         }

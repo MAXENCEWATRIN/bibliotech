@@ -1,7 +1,7 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.entity;
 
+import com.maxencew.biblioto.application.exception.MappingEntityException;
 import com.maxencew.biblioto.domain.model.Editor;
-import com.maxencew.biblioto.infrastructure.entity.BookEntity;
 import com.maxencew.biblioto.infrastructure.entity.EditorEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,36 +10,30 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:28+0200",
+    date = "2024-07-11T00:30:11+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class EditorEntityMapperImpl implements EditorEntityMapper {
 
     @Override
-    public EditorEntity toEntity(Editor editor) {
+    public EditorEntity toEntity(Editor editor) throws MappingEntityException {
         if ( editor == null ) {
             return null;
         }
 
-        String name = null;
-        String category = null;
-        String edition = null;
+        EditorEntity editorEntity = new EditorEntity();
 
-        name = editor.getName();
-        category = editor.getCategory();
-        edition = editor.getEdition();
-
-        List<BookEntity> books = null;
-        Long id = null;
-
-        EditorEntity editorEntity = new EditorEntity( id, name, category, edition, books );
+        editorEntity.setId( editor.getId() );
+        editorEntity.setName( editor.getName() );
+        editorEntity.setCategory( editor.getCategory() );
+        editorEntity.setEdition( editor.getEdition() );
 
         return editorEntity;
     }
 
     @Override
-    public Editor toDomain(EditorEntity editor) {
+    public Editor toDomain(EditorEntity editor) throws MappingEntityException {
         if ( editor == null ) {
             return null;
         }
@@ -55,7 +49,7 @@ public class EditorEntityMapperImpl implements EditorEntityMapper {
     }
 
     @Override
-    public List<Editor> toDomainList(List<EditorEntity> entities) {
+    public List<Editor> toDomainList(List<EditorEntity> entities) throws MappingEntityException {
         if ( entities == null ) {
             return null;
         }
@@ -69,7 +63,7 @@ public class EditorEntityMapperImpl implements EditorEntityMapper {
     }
 
     @Override
-    public List<EditorEntity> toEntityList(List<Editor> editors) {
+    public List<EditorEntity> toEntityList(List<Editor> editors) throws MappingEntityException {
         if ( editors == null ) {
             return null;
         }

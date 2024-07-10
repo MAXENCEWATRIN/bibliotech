@@ -1,5 +1,6 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.entity;
 
+import com.maxencew.biblioto.application.exception.MappingEntityException;
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.domain.model.Editor;
 import com.maxencew.biblioto.domain.model.Library;
@@ -17,20 +18,21 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:28+0200",
+    date = "2024-07-11T00:30:10+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class BookEntityMapperImpl implements BookEntityMapper {
 
     @Override
-    public BookEntity toEntity(Book book) {
+    public BookEntity toEntity(Book book) throws MappingEntityException {
         if ( book == null ) {
             return null;
         }
 
         BookEntity bookEntity = new BookEntity();
 
+        bookEntity.setId( book.getId() );
         bookEntity.setIsbnId( book.getIsbnId() );
         bookEntity.setOldIsbnId( book.getOldIsbnId() );
         bookEntity.setTitle( book.getTitle() );
@@ -50,6 +52,9 @@ public class BookEntityMapperImpl implements BookEntityMapper {
         bookEntity.setLibrary( libraryToLibraryEntity( book.getLibrary() ) );
         bookEntity.setOwner( ownerToOwnerEntity( book.getOwner() ) );
         bookEntity.setThemes( themeListToThemeEntityList( book.getThemes() ) );
+        bookEntity.setOverallReception( book.getOverallReception() );
+        bookEntity.setPraises( book.getPraises() );
+        bookEntity.setCriticisms( book.getCriticisms() );
         bookEntity.setIsWishList( book.getIsWishList() );
         bookEntity.setIsAnOpenLibaryApiRegister( book.getIsAnOpenLibaryApiRegister() );
         bookEntity.setIsAnOpenLibaryApiBookValidate( book.getIsAnOpenLibaryApiBookValidate() );
@@ -58,7 +63,7 @@ public class BookEntityMapperImpl implements BookEntityMapper {
     }
 
     @Override
-    public Book toDomain(BookEntity bookEntity) {
+    public Book toDomain(BookEntity bookEntity) throws MappingEntityException {
         if ( bookEntity == null ) {
             return null;
         }
@@ -85,6 +90,9 @@ public class BookEntityMapperImpl implements BookEntityMapper {
         book.library( libraryEntityToLibrary( bookEntity.getLibrary() ) );
         book.owner( ownerEntityToOwner( bookEntity.getOwner() ) );
         book.themes( themeEntityListToThemeList( bookEntity.getThemes() ) );
+        book.overallReception( bookEntity.getOverallReception() );
+        book.praises( bookEntity.getPraises() );
+        book.criticisms( bookEntity.getCriticisms() );
         book.isWishList( bookEntity.getIsWishList() );
         book.isAnOpenLibaryApiRegister( bookEntity.getIsAnOpenLibaryApiRegister() );
         book.isAnOpenLibaryApiBookValidate( bookEntity.getIsAnOpenLibaryApiBookValidate() );
@@ -93,7 +101,7 @@ public class BookEntityMapperImpl implements BookEntityMapper {
     }
 
     @Override
-    public List<Book> toDomainList(List<BookEntity> entities) {
+    public List<Book> toDomainList(List<BookEntity> entities) throws MappingEntityException {
         if ( entities == null ) {
             return null;
         }
@@ -107,7 +115,7 @@ public class BookEntityMapperImpl implements BookEntityMapper {
     }
 
     @Override
-    public List<BookEntity> toEntityList(List<Book> books) {
+    public List<BookEntity> toEntityList(List<Book> books) throws MappingEntityException {
         if ( books == null ) {
             return null;
         }
@@ -125,19 +133,12 @@ public class BookEntityMapperImpl implements BookEntityMapper {
             return null;
         }
 
-        Long id = null;
-        String name = null;
-        String category = null;
-        String edition = null;
+        EditorEntity editorEntity = new EditorEntity();
 
-        id = editor.getId();
-        name = editor.getName();
-        category = editor.getCategory();
-        edition = editor.getEdition();
-
-        List<BookEntity> books = null;
-
-        EditorEntity editorEntity = new EditorEntity( id, name, category, edition, books );
+        editorEntity.setId( editor.getId() );
+        editorEntity.setName( editor.getName() );
+        editorEntity.setCategory( editor.getCategory() );
+        editorEntity.setEdition( editor.getEdition() );
 
         return editorEntity;
     }
@@ -147,19 +148,12 @@ public class BookEntityMapperImpl implements BookEntityMapper {
             return null;
         }
 
-        Long id = null;
-        String name = null;
-        String location = null;
-        Integer capacity = null;
+        LibraryEntity libraryEntity = new LibraryEntity();
 
-        id = library.getId();
-        name = library.getName();
-        location = library.getLocation();
-        capacity = library.getCapacity();
-
-        List<BookEntity> books = null;
-
-        LibraryEntity libraryEntity = new LibraryEntity( id, name, location, capacity, books );
+        libraryEntity.setId( library.getId() );
+        libraryEntity.setName( library.getName() );
+        libraryEntity.setLocation( library.getLocation() );
+        libraryEntity.setCapacity( library.getCapacity() );
 
         return libraryEntity;
     }
@@ -169,19 +163,12 @@ public class BookEntityMapperImpl implements BookEntityMapper {
             return null;
         }
 
-        Long id = null;
-        String firstName = null;
-        String lastName = null;
-        String note = null;
+        OwnerEntity ownerEntity = new OwnerEntity();
 
-        id = owner.getId();
-        firstName = owner.getFirstName();
-        lastName = owner.getLastName();
-        note = owner.getNote();
-
-        List<BookEntity> books = null;
-
-        OwnerEntity ownerEntity = new OwnerEntity( id, firstName, lastName, note, books );
+        ownerEntity.setId( owner.getId() );
+        ownerEntity.setFirstName( owner.getFirstName() );
+        ownerEntity.setLastName( owner.getLastName() );
+        ownerEntity.setNote( owner.getNote() );
 
         return ownerEntity;
     }
@@ -191,20 +178,14 @@ public class BookEntityMapperImpl implements BookEntityMapper {
             return null;
         }
 
-        Long id = null;
-        String name = null;
-        List<String> keywords = null;
+        ThemeEntity themeEntity = new ThemeEntity();
 
-        id = theme.getId();
-        name = theme.getName();
+        themeEntity.setId( theme.getId() );
+        themeEntity.setName( theme.getName() );
         List<String> list = theme.getKeywords();
         if ( list != null ) {
-            keywords = new ArrayList<String>( list );
+            themeEntity.setKeywords( new ArrayList<String>( list ) );
         }
-
-        List<BookEntity> books = null;
-
-        ThemeEntity themeEntity = new ThemeEntity( id, name, keywords, books );
 
         return themeEntity;
     }

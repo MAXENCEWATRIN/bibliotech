@@ -1,7 +1,7 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.entity;
 
+import com.maxencew.biblioto.application.exception.MappingEntityException;
 import com.maxencew.biblioto.domain.model.Owner;
-import com.maxencew.biblioto.infrastructure.entity.BookEntity;
 import com.maxencew.biblioto.infrastructure.entity.OwnerEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,36 +10,30 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:28+0200",
+    date = "2024-07-11T00:30:11+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class OwnerEntityMapperImpl implements OwnerEntityMapper {
 
     @Override
-    public OwnerEntity toEntity(Owner owner) {
+    public OwnerEntity toEntity(Owner owner) throws MappingEntityException {
         if ( owner == null ) {
             return null;
         }
 
-        String firstName = null;
-        String lastName = null;
-        String note = null;
+        OwnerEntity ownerEntity = new OwnerEntity();
 
-        firstName = owner.getFirstName();
-        lastName = owner.getLastName();
-        note = owner.getNote();
-
-        List<BookEntity> books = null;
-        Long id = null;
-
-        OwnerEntity ownerEntity = new OwnerEntity( id, firstName, lastName, note, books );
+        ownerEntity.setId( owner.getId() );
+        ownerEntity.setFirstName( owner.getFirstName() );
+        ownerEntity.setLastName( owner.getLastName() );
+        ownerEntity.setNote( owner.getNote() );
 
         return ownerEntity;
     }
 
     @Override
-    public Owner toDomain(OwnerEntity ownerEntity) {
+    public Owner toDomain(OwnerEntity ownerEntity) throws MappingEntityException {
         if ( ownerEntity == null ) {
             return null;
         }
@@ -60,7 +54,7 @@ public class OwnerEntityMapperImpl implements OwnerEntityMapper {
     }
 
     @Override
-    public List<Owner> toDomainList(List<OwnerEntity> entities) {
+    public List<Owner> toDomainList(List<OwnerEntity> entities) throws MappingEntityException {
         if ( entities == null ) {
             return null;
         }
@@ -74,7 +68,7 @@ public class OwnerEntityMapperImpl implements OwnerEntityMapper {
     }
 
     @Override
-    public List<OwnerEntity> toEntityList(List<Owner> owners) {
+    public List<OwnerEntity> toEntityList(List<Owner> owners) throws MappingEntityException {
         if ( owners == null ) {
             return null;
         }

@@ -1,5 +1,6 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.dto;
 
+import com.maxencew.biblioto.application.exception.MappingDtoException;
 import com.maxencew.biblioto.application.request.ThemeRequest;
 import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.response.ThemeResponse;
@@ -11,28 +12,28 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:28+0200",
+    date = "2024-07-11T00:26:56+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class ThemeDtoMapperImpl implements ThemeDtoMapper {
 
     @Override
-    public Theme toDomain(ThemeRequest request) {
+    public Theme toDomain(ThemeRequest request) throws MappingDtoException {
         if ( request == null ) {
             return null;
         }
 
+        Long id = null;
         String name = null;
         List<String> keywords = null;
 
+        id = request.getId();
         name = request.getName();
         List<String> list = request.getKeywords();
         if ( list != null ) {
             keywords = new ArrayList<String>( list );
         }
-
-        Long id = null;
 
         Theme theme = new Theme( id, name, keywords );
 
@@ -40,7 +41,7 @@ public class ThemeDtoMapperImpl implements ThemeDtoMapper {
     }
 
     @Override
-    public ThemeResponse toDto(Theme theme) {
+    public ThemeResponse toDto(Theme theme) throws MappingDtoException {
         if ( theme == null ) {
             return null;
         }
@@ -64,7 +65,7 @@ public class ThemeDtoMapperImpl implements ThemeDtoMapper {
     }
 
     @Override
-    public List<Theme> toDomainList(List<ThemeRequest> themeRequests) {
+    public List<Theme> toDomainList(List<ThemeRequest> themeRequests) throws MappingDtoException {
         if ( themeRequests == null ) {
             return null;
         }
@@ -78,7 +79,7 @@ public class ThemeDtoMapperImpl implements ThemeDtoMapper {
     }
 
     @Override
-    public List<ThemeResponse> toDtoList(List<Theme> themes) {
+    public List<ThemeResponse> toDtoList(List<Theme> themes) throws MappingDtoException {
         if ( themes == null ) {
             return null;
         }

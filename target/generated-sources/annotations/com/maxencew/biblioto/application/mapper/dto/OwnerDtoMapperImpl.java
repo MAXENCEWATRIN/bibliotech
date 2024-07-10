@@ -1,5 +1,6 @@
-package com.maxencew.biblioto.application.mapper;
+package com.maxencew.biblioto.application.mapper.dto;
 
+import com.maxencew.biblioto.application.exception.MappingDtoException;
 import com.maxencew.biblioto.application.request.OwnerRequest;
 import com.maxencew.biblioto.application.response.OwnerResponse;
 import com.maxencew.biblioto.domain.model.Owner;
@@ -10,27 +11,27 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-10T02:46:28+0200",
+    date = "2024-07-11T00:26:55+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
 public class OwnerDtoMapperImpl implements OwnerDtoMapper {
 
     @Override
-    public Owner toDomain(OwnerRequest request) {
+    public Owner toDomain(OwnerRequest request) throws MappingDtoException {
         if ( request == null ) {
             return null;
         }
 
+        Long id = null;
         String firstName = null;
         String lastName = null;
         String note = null;
 
+        id = request.getId();
         firstName = request.getFirstName();
         lastName = request.getLastName();
         note = request.getNote();
-
-        Long id = null;
 
         Owner owner = new Owner( id, firstName, lastName, note );
 
@@ -38,7 +39,7 @@ public class OwnerDtoMapperImpl implements OwnerDtoMapper {
     }
 
     @Override
-    public OwnerResponse toDto(Owner owner) {
+    public OwnerResponse toDto(Owner owner) throws MappingDtoException {
         if ( owner == null ) {
             return null;
         }
@@ -54,7 +55,7 @@ public class OwnerDtoMapperImpl implements OwnerDtoMapper {
     }
 
     @Override
-    public List<Owner> toDomainList(List<OwnerRequest> ownerRequests) {
+    public List<Owner> toDomainList(List<OwnerRequest> ownerRequests) throws MappingDtoException {
         if ( ownerRequests == null ) {
             return null;
         }
@@ -68,7 +69,7 @@ public class OwnerDtoMapperImpl implements OwnerDtoMapper {
     }
 
     @Override
-    public List<OwnerResponse> toDtoList(List<Owner> owners) {
+    public List<OwnerResponse> toDtoList(List<Owner> owners) throws MappingDtoException {
         if ( owners == null ) {
             return null;
         }

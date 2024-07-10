@@ -2,6 +2,7 @@ package com.maxencew.biblioto.application.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.maxencew.biblioto.application.response.BookResponse;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.util.List;
 public class LibraryRequest {
 
     private Long id;
+    @NotBlank(message = "Name is required")
     private String name;
     private String location;
     private Integer capacity;

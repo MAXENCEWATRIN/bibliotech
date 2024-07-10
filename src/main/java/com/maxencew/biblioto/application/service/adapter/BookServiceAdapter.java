@@ -77,7 +77,7 @@ public class BookServiceAdapter implements BookService {
         if (Objects.isNull(bookRetrieveByIsbnId)) {
             LOGGER.info("The Isbn id {} didn't exist yet, trying to retrieve information on external API.", isbnId);
             final Book book = isbnService.findBookByIsbnIdOnExternalResources(isbnId);
-            LOGGER.info("ISBN ID returned information from the book");
+            LOGGER.info("ISBN ID returned information from the book on OpenLibraryAPi");
             LOGGER.info("Contact with ChatGPT API to add some information to the book.");
             final ChatGptSummariseBookPattern complementaryInformations =
                     openAIService.getBookInformation(book.getTitle(), book.getAuthorName());
