@@ -6,6 +6,7 @@ import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
 import com.maxencew.biblioto.application.service.api.BookService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/books")
+@Slf4j
 public class BookController {
 
     @Autowired
@@ -23,6 +25,7 @@ public class BookController {
 
     @PostMapping
     public BibliotoHttpResponse<BookResponse> addBook(@Valid @RequestBody BookRequest book) {
+        LOGGER.info("AZERTYUI");
         return BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.addBook(bookDtoMapper.toDomain(book))));
     }
 
@@ -40,6 +43,7 @@ public class BookController {
 
     @GetMapping
     public BibliotoHttpResponse<List<BookResponse>> getAllBooks() {
+        LOGGER.info("AZERTYUI");
         return BibliotoHttpResponse.success(bookDtoMapper.toDtoList(bookServiceAdapter.getBooks()));
     }
 
