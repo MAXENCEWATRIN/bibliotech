@@ -14,6 +14,8 @@ import com.maxencew.biblioto.infrastructure.entity.ThemeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+
+import com.maxencew.biblioto.infrastructure.mapper.entity.BookEntityMapper;
 import org.springframework.stereotype.Component;
 
 @Generated(

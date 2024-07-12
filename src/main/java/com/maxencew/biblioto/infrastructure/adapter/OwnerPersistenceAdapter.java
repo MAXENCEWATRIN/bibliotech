@@ -1,6 +1,6 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
-import com.maxencew.biblioto.application.mapper.entity.OwnerEntityMapper;
+import com.maxencew.biblioto.infrastructure.mapper.entity.OwnerEntityMapper;
 import com.maxencew.biblioto.domain.model.Owner;
 import com.maxencew.biblioto.domain.ports.spi.OwnerPersistencePort;
 import com.maxencew.biblioto.infrastructure.entity.OwnerEntity;

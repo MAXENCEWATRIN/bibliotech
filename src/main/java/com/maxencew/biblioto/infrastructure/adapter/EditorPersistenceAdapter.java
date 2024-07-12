@@ -1,6 +1,6 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
-import com.maxencew.biblioto.application.mapper.entity.EditorEntityMapper;
+import com.maxencew.biblioto.infrastructure.mapper.entity.EditorEntityMapper;
 import com.maxencew.biblioto.domain.model.Editor;
 import com.maxencew.biblioto.domain.ports.spi.EditorPersistencePort;
 import com.maxencew.biblioto.infrastructure.entity.EditorEntity;

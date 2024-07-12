@@ -1,4 +1,4 @@
-package com.maxencew.biblioto.application.mapper.entity;
+package com.maxencew.biblioto.infrastructure.mapper.entity;
 
 import com.maxencew.biblioto.application.exception.MappingEntityException;
 import com.maxencew.biblioto.infrastructure.entity.ThemeEntity;

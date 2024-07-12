@@ -1,6 +1,6 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
-import com.maxencew.biblioto.application.mapper.entity.ThemeEntityMapper;
+import com.maxencew.biblioto.infrastructure.mapper.entity.ThemeEntityMapper;
 import com.maxencew.biblioto.domain.model.Theme;
 import com.maxencew.biblioto.domain.ports.spi.ThemePersistencePort;
 import com.maxencew.biblioto.infrastructure.entity.ThemeEntity;

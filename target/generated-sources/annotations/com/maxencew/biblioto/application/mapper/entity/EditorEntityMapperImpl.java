@@ -6,6 +6,8 @@ import com.maxencew.biblioto.infrastructure.entity.EditorEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+
+import com.maxencew.biblioto.infrastructure.mapper.entity.EditorEntityMapper;
 import org.springframework.stereotype.Component;
 
 @Generated(

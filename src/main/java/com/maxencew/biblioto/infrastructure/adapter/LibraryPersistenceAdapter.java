@@ -1,7 +1,7 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
 import com.maxencew.biblioto.application.exception.MappingEntityException;
-import com.maxencew.biblioto.application.mapper.entity.LibraryEntityMapper;
+import com.maxencew.biblioto.infrastructure.mapper.entity.LibraryEntityMapper;
 import com.maxencew.biblioto.domain.model.Library;
 import com.maxencew.biblioto.domain.ports.spi.LibraryPersistencePort;
 import com.maxencew.biblioto.infrastructure.entity.LibraryEntity;
