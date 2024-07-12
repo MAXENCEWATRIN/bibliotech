@@ -1,6 +1,5 @@
 package com.maxencew.biblioto.application.service.adapter;
 
-import com.maxencew.biblioto.application.response.ChatGptSummariseBookPattern;
 import com.maxencew.biblioto.application.service.IsbnService;
 import com.maxencew.biblioto.application.service.api.BookService;
 import com.maxencew.biblioto.application.service.api.OpenAIService;
@@ -79,6 +78,8 @@ public class BookServiceAdapter implements BookService {
             final Book book = isbnService.findBookByIsbnIdOnExternalResources(isbnId);
             LOGGER.info("ISBN ID returned information from the book on OpenLibraryAPi");
             LOGGER.info("Contact with ChatGPT API to add some information to the book.");
+            //TODO : Désactivé par économie d'argent.
+            /*
             final ChatGptSummariseBookPattern complementaryInformations =
                     openAIService.getBookInformation(book.getTitle(), book.getAuthorName());
             book.setSynopsis(complementaryInformations.getSynopsis());
@@ -86,7 +87,7 @@ public class BookServiceAdapter implements BookService {
             book.setOverallReception(complementaryInformations.getPublicOpinions().getOverallReception());
             book.setCriticisms(complementaryInformations.getPublicOpinions().getCriticisms());
             book.setPraises(complementaryInformations.getPublicOpinions().getPraises());
-            LOGGER.info("All complementary information had been successfully retrieved.");
+            LOGGER.info("All complementary information had been successfully retrieved.");*/
             return book;
         }
 

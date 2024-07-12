@@ -1,13 +1,14 @@
-package com.maxencew.biblioto.web.controller;
+package com.maxencew.biblioto.application.web.restController;
 
 import com.maxencew.biblioto.application.mapper.dto.BookDtoMapper;
 import com.maxencew.biblioto.application.request.BookRequest;
-import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
+import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.service.api.BookService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public class BookController {
 
     @Autowired
     private BookService bookServiceAdapter;
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
     private BookDtoMapper bookDtoMapper;
@@ -53,8 +56,9 @@ public class BookController {
     }
 
     @GetMapping("isbn/{id}")
-    public BibliotoHttpResponse<BookResponse> getBookByIsbn(@PathVariable Long id) {
-        return BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.getByIsbnId(id)));
+    public void getBookByIsbn(@PathVariable Long id) {
+        BibliotoHttpResponse<BookResponse> success = BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.getByIsbnId(id)));
+        simpMessagingTemplate.convertAndSend("/topic/books", success);
     }
 
 }
