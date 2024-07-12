@@ -7,8 +7,9 @@ import com.maxencew.biblioto.application.response.ChatGptSummariseBookPattern;
 import com.maxencew.biblioto.application.response.OpenAiResponse;
 import com.maxencew.biblioto.application.service.api.OpenAIService;
 import com.maxencew.biblioto.infrastructure.configuration.AppConfig;
-import com.maxencew.biblioto.infrastructure.configuration.ExternalApiConfiguration;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,9 @@ import java.util.Objects;
 @Service
 @AllArgsConstructor
 public class OpenAIAdapter implements OpenAIService {
+
+    @Autowired
+    private Environment environment;
 
     public static final String USER_PROMPT_CONTENT = "Please, respond with a Json Format respecting the information below, your response must be interpretate by a java API resource :\n" +
             "\n" +
@@ -41,18 +45,17 @@ public class OpenAIAdapter implements OpenAIService {
             "}\n" +
             "```";
     public static final String SYSTEM_PROMPT_CONTENT = "You are a library assistant, your role is to create relevant summaries and condense the opinions of the literary community.";
-
-    private ExternalApiConfiguration externalApiConfiguration;
+    @Autowired
     private AppConfig appConfig;
 
     @Override
     public ChatGptSummariseBookPattern getBookInformation(final String bookName, final String author) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
-        headers.set("Authorization", "Bearer " + externalApiConfiguration.getOpenAIApiKey());
+        headers.set("Authorization", "Bearer " + environment.getProperty("external.api.openAI.key"));
 
         ResponseEntity<OpenAiResponse> response = appConfig.restTemplateOpenAi()
-                .exchange(externalApiConfiguration.getOpenAIUrl(), HttpMethod.POST,
+                .exchange(environment.getProperty("external.api.openAI.url"), HttpMethod.POST,
                         getOpenAiRequestHttpEntity(headers), OpenAiResponse.class);
         try {
             if (Objects.nonNull(response.getBody()) && !response.getBody().getChoices().isEmpty()) {

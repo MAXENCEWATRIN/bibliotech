@@ -4,11 +4,12 @@ import com.maxencew.biblioto.application.mapper.dto.OpenLibraryBookMapper;
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.domain.model.Editor;
 import com.maxencew.biblioto.domain.ports.spi.OpenLibraryApiPort;
-import com.maxencew.biblioto.infrastructure.configuration.ExternalApiConfiguration;
 import com.maxencew.biblioto.infrastructure.exception.ExternalRessourcesCommunicationException;
 import com.maxencew.biblioto.infrastructure.external.OpenLibraryBookApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -24,11 +25,12 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
     private static final String JSON_SUFFIX = ".json";
     private static final String FIELDS_QUERY = "&fields=key,title,author_name,editions";
     private final RestTemplate restTemplate;
-    private final ExternalApiConfiguration externalApiConfiguration;
+    @Autowired
+    private final Environment environment;
     private final OpenLibraryBookMapper openLibraryBookMapper;
 
     public String buildOpenLibraryApiBookUrl(Long isbnId) {
-        return externalApiConfiguration.getOpenLibraryBooksUrl() + ISBN_QUERY + isbnId + JSON_SUFFIX;
+        return environment.getProperty("external.api.openLibrary.books-api.url") + ISBN_QUERY + isbnId + JSON_SUFFIX;
     }
 
     @Override
@@ -40,8 +42,8 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
             headers.set("Content-Type", "application/json");
 
             Map<String, String> requestBody = Map.of(
-                    "access", externalApiConfiguration.getOpenLibraryLogin(),
-                    "secret", externalApiConfiguration.getOpenLibraryKey()
+                    "access", environment.getProperty("external.api.openLibrary.login"),
+                    "secret", environment.getProperty("external.api.openLibrary.key")
             );
 
             HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
@@ -123,7 +125,7 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
     @Override
     //A terminer
     public Optional<Book> retrieveBookCover(Long isbnId) {
-        String url = String.format("%s/books/%s", externalApiConfiguration.getOpenLibraryCoversUrl(), isbnId);
+        String url = String.format("%s/books/%s", environment.getProperty("external.api.openLibrary.covers-api.url"), isbnId);
         ResponseEntity<Book> response = restTemplate.getForEntity(url, Book.class);
         LOGGER.info("{} - Api Call to Open Library API result.", response.getStatusCode());
 

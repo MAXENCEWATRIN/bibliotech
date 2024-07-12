@@ -20,8 +20,8 @@ external:
       url: XXXXXXXXXX
       key: XXXXXX
     openLibrary:
-      login: PumE0lhOL6a3LUFX
-      key: XxWUS69U2ndRXXsg
+      login: ${OPENLIBRARY_LOGIN}
+      key: ${OPENLIBRARY_KEY}
       login-api:
         url: https://openlibrary.org/account/login
       covers-api:
@@ -29,5 +29,5 @@ external:
       books-api:
         url: https://openlibrary.org/api/volumes/brief/
     openAI:
-      key: sk-proj-PnHmbTuHUb1kzp1TAArKT3BlbkFJop3QCvt1JnG8EkjV2sxA
+      key: ${OPENAI_API_KEY}
       url: https://api.openai.com/v1/chat/completions
