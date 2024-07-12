@@ -1,4 +1,4 @@
-package com.maxencew.biblioto.web.controller;
+package com.maxencew.biblioto.application.web.restController;
 
 import com.maxencew.biblioto.application.mapper.dto.LibraryDtoMapper;
 import com.maxencew.biblioto.application.request.LibraryRequest;

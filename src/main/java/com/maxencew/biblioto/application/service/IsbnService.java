@@ -2,7 +2,6 @@ package com.maxencew.biblioto.application.service;
 
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.domain.ports.spi.BookPersistencePort;
-import com.maxencew.biblioto.domain.ports.spi.ExternalIsbnApiPort;
 import com.maxencew.biblioto.domain.ports.spi.OpenLibraryApiPort;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +31,10 @@ public class IsbnService {
             if (book.isEmpty()) {
                 throw new IllegalArgumentException("Aucune info sur ce livre dans l'API openLibrary.");
             }
-            return book.get();
+
+            Book buildBook = book.get();
+            LOGGER.info("{}, {}, {}, {}", buildBook.getAuthorName(), buildBook.getTitle(), buildBook.getIsbnId(), buildBook.getNumberOfPage());
+            return buildBook;
         }
         return bookRetrieveByIsbnId;
     }

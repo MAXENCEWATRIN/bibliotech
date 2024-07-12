@@ -92,9 +92,10 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
                             .build();
 
                     List<OpenLibraryBookApiResponse.Item> items = response.getBody().getItems();
+                    Optional<List<String>> isbn10 = Optional.ofNullable(detailsData.getIsbn10());
                     booksOpenLibraryResponse.add(Book.builder()
                             .isbnId(new BigDecimal(detailsData.getIsbn13().getFirst()))
-                            .oldIsbnId(new BigDecimal(removeNonNumericCharacters(detailsData.getIsbn10().getFirst())))
+                            .oldIsbnId(removeNonNumericCharacters(isbn10.map(List::getFirst).orElse(null)))
                             .openLibraryId(openLibaryBookResponse.getOlids().getFirst())
                             .titleLong(detailsData.getFullTitle())
                             .title(detailsData.getTitle())
@@ -135,7 +136,7 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
 
     }
 
-    public static String removeNonNumericCharacters(String input) {
-        return input.replaceAll("[^0-9]", "");
+    public static BigDecimal removeNonNumericCharacters(String input) {
+        return Objects.nonNull(input) ? new BigDecimal(input.replaceAll("[^0-9]", "")) : null;
     }
 }

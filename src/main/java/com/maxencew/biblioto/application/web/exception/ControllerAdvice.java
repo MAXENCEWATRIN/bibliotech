@@ -1,4 +1,4 @@
-package com.maxencew.biblioto.web.exception;
+package com.maxencew.biblioto.application.web.exception;
 
 import com.maxencew.biblioto.application.exception.BusinessException;
 import com.maxencew.biblioto.application.exception.MappingDtoException;
