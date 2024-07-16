@@ -5,7 +5,6 @@ import com.maxencew.biblioto.application.request.EditorRequest;
 import com.maxencew.biblioto.application.response.EditorResponse;
 import com.maxencew.biblioto.domain.model.Editor;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ public interface EditorDtoMapper {
 
     Editor toDomain(EditorRequest request) throws MappingDtoException;
 
-    @Mapping(target = "books", ignore = true)
     EditorResponse toDto(Editor editor) throws MappingDtoException; 
 
     List<Editor> toDomainList(List<EditorRequest> editorRequests) throws MappingDtoException; 

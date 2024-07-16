@@ -1,4 +1,4 @@
-package com.maxencew.biblioto.application.service.adapter;
+package com.maxencew.biblioto.domain.adapter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,23 +8,20 @@ import com.maxencew.biblioto.application.response.OpenAiResponse;
 import com.maxencew.biblioto.application.service.api.OpenAIService;
 import com.maxencew.biblioto.infrastructure.configuration.AppConfig;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
-@Service
 @AllArgsConstructor
 public class OpenAIAdapter implements OpenAIService {
 
-    @Autowired
     private Environment environment;
+    private AppConfig appConfig;
 
     public static final String USER_PROMPT_CONTENT = "Please, respond with a Json Format respecting the information below, your response must be interpretate by a java API resource :\n" +
             "\n" +
@@ -45,8 +42,6 @@ public class OpenAIAdapter implements OpenAIService {
             "}\n" +
             "```";
     public static final String SYSTEM_PROMPT_CONTENT = "You are a library assistant, your role is to create relevant summaries and condense the opinions of the literary community.";
-    @Autowired
-    private AppConfig appConfig;
 
     @Override
     public ChatGptSummariseBookPattern getBookInformation(final String bookName, final String author) {
@@ -54,7 +49,7 @@ public class OpenAIAdapter implements OpenAIService {
         headers.set("Content-Type", "application/json");
         headers.set("Authorization", "Bearer " + environment.getProperty("external.api.openAI.key"));
 
-        ResponseEntity<OpenAiResponse> response = appConfig.restTemplateOpenAi()
+        ResponseEntity<OpenAiResponse> response = appConfig.restTemplate()
                 .exchange(environment.getProperty("external.api.openAI.url"), HttpMethod.POST,
                         getOpenAiRequestHttpEntity(headers), OpenAiResponse.class);
         try {
