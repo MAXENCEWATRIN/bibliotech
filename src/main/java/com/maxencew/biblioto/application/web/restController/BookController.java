@@ -2,7 +2,7 @@ package com.maxencew.biblioto.application.web.restController;
 
 import com.maxencew.biblioto.application.mapper.dto.BookDtoMapper;
 import com.maxencew.biblioto.application.request.BookRequest;
-import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
+import com.maxencew.biblioto.application.response.BibliotechHttpResponse;
 import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.service.api.BookService;
 import com.maxencew.biblioto.application.service.api.ImageService;
@@ -33,14 +33,14 @@ public class BookController {
     private BookDtoMapper bookDtoMapper;
 
     @PostMapping
-    public BibliotoHttpResponse<BookResponse> addBook(@Valid @RequestBody BookRequest book) {
-        return BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.addBook(bookDtoMapper.toDomain(book))));
+    public BibliotechHttpResponse<BookResponse> addBook(@Valid @RequestBody BookRequest book) {
+        return BibliotechHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.addBook(bookDtoMapper.toDomain(book))));
     }
 
     @PutMapping("/{id}")
-    public BibliotoHttpResponse<BookResponse> updateBook(@PathVariable Long id, @Valid @RequestBody BookRequest book) {
+    public BibliotechHttpResponse<BookResponse> updateBook(@PathVariable Long id, @Valid @RequestBody BookRequest book) {
         book.setId(id);
-        return BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.addBook(bookDtoMapper.toDomain(book))));
+        return BibliotechHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.addBook(bookDtoMapper.toDomain(book))));
     }
 
     @DeleteMapping("/{id}")
@@ -50,18 +50,18 @@ public class BookController {
     }
 
     @GetMapping
-    public BibliotoHttpResponse<List<BookResponse>> getAllBooks() {
-        return BibliotoHttpResponse.success(bookDtoMapper.toDtoList(bookServiceAdapter.getBooks()));
+    public BibliotechHttpResponse<List<BookResponse>> getAllBooks() {
+        return BibliotechHttpResponse.success(bookDtoMapper.toDtoList(bookServiceAdapter.getBooks()));
     }
 
     @GetMapping("/{id}")
-    public BibliotoHttpResponse<BookResponse> getBookById(@PathVariable Long id) {
-        return BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.getBookById(id)));
+    public BibliotechHttpResponse<BookResponse> getBookById(@PathVariable Long id) {
+        return BibliotechHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.getBookById(id)));
     }
 
     @GetMapping("isbn/{id}")
     public void getBookByIsbn(@PathVariable Long id) {
-        BibliotoHttpResponse<BookResponse> success = BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.getByIsbnId(id)));
+        BibliotechHttpResponse<BookResponse> success = BibliotechHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.getByIsbnId(id)));
         simpMessagingTemplate.convertAndSend("/topic/books", success);
     }
 

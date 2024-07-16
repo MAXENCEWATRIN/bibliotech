@@ -2,7 +2,7 @@ package com.maxencew.biblioto.application.web.restController;
 
 import com.maxencew.biblioto.application.mapper.dto.ThemeDtoMapper;
 import com.maxencew.biblioto.application.request.ThemeRequest;
-import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
+import com.maxencew.biblioto.application.response.BibliotechHttpResponse;
 import com.maxencew.biblioto.application.response.ThemeResponse;
 import com.maxencew.biblioto.application.service.api.ThemeService;
 import jakarta.validation.Valid;
@@ -22,14 +22,14 @@ public class ThemeController {
     private ThemeDtoMapper themeDtoMapper;
 
     @PostMapping
-    public BibliotoHttpResponse<ThemeResponse> addTheme(@Valid @RequestBody ThemeRequest theme) {
-        return BibliotoHttpResponse.success(themeDtoMapper.toDto(themeServiceAdapter.addTheme(themeDtoMapper.toDomain(theme))));
+    public BibliotechHttpResponse<ThemeResponse> addTheme(@Valid @RequestBody ThemeRequest theme) {
+        return BibliotechHttpResponse.success(themeDtoMapper.toDto(themeServiceAdapter.addTheme(themeDtoMapper.toDomain(theme))));
     }
 
     @PutMapping("/{id}")
-    public BibliotoHttpResponse<ThemeResponse> updateTheme(@PathVariable Long id, @Valid @RequestBody ThemeRequest theme) {
+    public BibliotechHttpResponse<ThemeResponse> updateTheme(@PathVariable Long id, @Valid @RequestBody ThemeRequest theme) {
         theme.setId(id);
-        return BibliotoHttpResponse.success(themeDtoMapper.toDto(themeServiceAdapter.addTheme(themeDtoMapper.toDomain(theme))));
+        return BibliotechHttpResponse.success(themeDtoMapper.toDto(themeServiceAdapter.addTheme(themeDtoMapper.toDomain(theme))));
     }
 
     @DeleteMapping("/{id}")
@@ -39,13 +39,13 @@ public class ThemeController {
     }
 
     @GetMapping
-    public BibliotoHttpResponse<List<ThemeResponse>> getAllThemes() {
-        return BibliotoHttpResponse.success(themeDtoMapper.toDtoList(themeServiceAdapter.getThemes()));
+    public BibliotechHttpResponse<List<ThemeResponse>> getAllThemes() {
+        return BibliotechHttpResponse.success(themeDtoMapper.toDtoList(themeServiceAdapter.getThemes()));
     }
 
     @GetMapping("/{id}")
-    public BibliotoHttpResponse<ThemeResponse> getThemeById(@PathVariable Long id) {
-        return BibliotoHttpResponse.success(themeDtoMapper.toDto(themeServiceAdapter.getThemeById(id)));
+    public BibliotechHttpResponse<ThemeResponse> getThemeById(@PathVariable Long id) {
+        return BibliotechHttpResponse.success(themeDtoMapper.toDto(themeServiceAdapter.getThemeById(id)));
     }
 
 }

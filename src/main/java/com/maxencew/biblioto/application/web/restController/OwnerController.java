@@ -2,7 +2,7 @@ package com.maxencew.biblioto.application.web.restController;
 
 import com.maxencew.biblioto.application.mapper.dto.OwnerDtoMapper;
 import com.maxencew.biblioto.application.request.OwnerRequest;
-import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
+import com.maxencew.biblioto.application.response.BibliotechHttpResponse;
 import com.maxencew.biblioto.application.response.OwnerResponse;
 import com.maxencew.biblioto.application.service.api.OwnerService;
 import jakarta.validation.Valid;
@@ -22,14 +22,14 @@ public class OwnerController {
     OwnerDtoMapper ownerDtoMapper;
 
     @PostMapping
-    public BibliotoHttpResponse<OwnerResponse> addOwner(@Valid @RequestBody OwnerRequest owner) {
-        return BibliotoHttpResponse.success(ownerDtoMapper.toDto(ownerServiceAdapter.addOwner(ownerDtoMapper.toDomain(owner))));
+    public BibliotechHttpResponse<OwnerResponse> addOwner(@Valid @RequestBody OwnerRequest owner) {
+        return BibliotechHttpResponse.success(ownerDtoMapper.toDto(ownerServiceAdapter.addOwner(ownerDtoMapper.toDomain(owner))));
     }
 
     @PutMapping("/{id}")
-    public BibliotoHttpResponse<OwnerResponse> updateOwner(@PathVariable Long id, @Valid @RequestBody OwnerRequest owner) {
+    public BibliotechHttpResponse<OwnerResponse> updateOwner(@PathVariable Long id, @Valid @RequestBody OwnerRequest owner) {
         owner.setId(id);
-        return BibliotoHttpResponse.success(ownerDtoMapper.toDto(ownerServiceAdapter.addOwner(ownerDtoMapper.toDomain(owner))));
+        return BibliotechHttpResponse.success(ownerDtoMapper.toDto(ownerServiceAdapter.addOwner(ownerDtoMapper.toDomain(owner))));
     }
 
     @DeleteMapping("/{id}")
@@ -39,12 +39,12 @@ public class OwnerController {
     }
 
     @GetMapping
-    public BibliotoHttpResponse<List<OwnerResponse>> getAllOwners() {
-        return BibliotoHttpResponse.success(ownerDtoMapper.toDtoList(ownerServiceAdapter.getOwners()));
+    public BibliotechHttpResponse<List<OwnerResponse>> getAllOwners() {
+        return BibliotechHttpResponse.success(ownerDtoMapper.toDtoList(ownerServiceAdapter.getOwners()));
     }
 
     @GetMapping("/{id}")
-    public BibliotoHttpResponse<OwnerResponse> getOwnerById(@PathVariable Long id) {
-        return BibliotoHttpResponse.success(ownerDtoMapper.toDto(ownerServiceAdapter.getOwnerById(id)));
+    public BibliotechHttpResponse<OwnerResponse> getOwnerById(@PathVariable Long id) {
+        return BibliotechHttpResponse.success(ownerDtoMapper.toDto(ownerServiceAdapter.getOwnerById(id)));
     }
 }
