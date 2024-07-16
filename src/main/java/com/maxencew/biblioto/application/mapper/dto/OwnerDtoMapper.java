@@ -5,7 +5,6 @@ import com.maxencew.biblioto.application.request.OwnerRequest;
 import com.maxencew.biblioto.application.response.OwnerResponse;
 import com.maxencew.biblioto.domain.model.Owner;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ public interface OwnerDtoMapper {
 
     Owner toDomain(OwnerRequest request) throws MappingDtoException; 
 
-    @Mapping(target = "books", ignore = true)
     OwnerResponse toDto(Owner owner) throws MappingDtoException; 
 
     List<Owner> toDomainList(List<OwnerRequest> ownerRequests) throws MappingDtoException; 

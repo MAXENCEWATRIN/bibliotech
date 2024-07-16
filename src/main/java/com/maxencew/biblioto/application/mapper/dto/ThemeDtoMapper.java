@@ -5,7 +5,6 @@ import com.maxencew.biblioto.application.request.ThemeRequest;
 import com.maxencew.biblioto.application.response.ThemeResponse;
 import com.maxencew.biblioto.domain.model.Theme;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ public interface ThemeDtoMapper {
 
     Theme toDomain(ThemeRequest request) throws MappingDtoException; 
 
-    @Mapping(target = "books", ignore = true)
     ThemeResponse toDto(Theme theme) throws MappingDtoException; 
 
     List<Theme> toDomainList(List<ThemeRequest> themeRequests) throws MappingDtoException; 

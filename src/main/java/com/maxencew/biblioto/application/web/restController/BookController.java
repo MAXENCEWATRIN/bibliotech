@@ -5,9 +5,13 @@ import com.maxencew.biblioto.application.request.BookRequest;
 import com.maxencew.biblioto.application.response.BibliotoHttpResponse;
 import com.maxencew.biblioto.application.response.BookResponse;
 import com.maxencew.biblioto.application.service.api.BookService;
+import com.maxencew.biblioto.application.service.api.ImageService;
+import com.maxencew.biblioto.domain.model.Book;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +25,8 @@ public class BookController {
     @Autowired
     private BookService bookServiceAdapter;
     @Autowired
+    private ImageService imageDownloaderService;
+    @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
@@ -28,7 +34,6 @@ public class BookController {
 
     @PostMapping
     public BibliotoHttpResponse<BookResponse> addBook(@Valid @RequestBody BookRequest book) {
-        LOGGER.info("AZERTYUI");
         return BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.addBook(bookDtoMapper.toDomain(book))));
     }
 
@@ -46,7 +51,6 @@ public class BookController {
 
     @GetMapping
     public BibliotoHttpResponse<List<BookResponse>> getAllBooks() {
-        LOGGER.info("AZERTYUI");
         return BibliotoHttpResponse.success(bookDtoMapper.toDtoList(bookServiceAdapter.getBooks()));
     }
 
@@ -59,6 +63,16 @@ public class BookController {
     public void getBookByIsbn(@PathVariable Long id) {
         BibliotoHttpResponse<BookResponse> success = BibliotoHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.getByIsbnId(id)));
         simpMessagingTemplate.convertAndSend("/topic/books", success);
+    }
+
+    @GetMapping("/{id}/cover")
+    public ResponseEntity<byte[]> getBookCover(@PathVariable Long id) {
+        Book book = bookServiceAdapter.getBookById(id);
+        if (book.getCoverImageId() == null) {
+            return ResponseEntity.notFound().build();
+        }
+        byte[] image = imageDownloaderService.getImageById(book.getCoverImageId());
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
 
 }

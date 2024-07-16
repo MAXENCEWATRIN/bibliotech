@@ -1,11 +1,10 @@
 package com.maxencew.biblioto.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.maxencew.biblioto.application.request.ThemeRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,6 +27,7 @@ public class Book {
     private Integer numberOfPage;
     private String openLibraryId;
     private String coverPageUrl;
+    private ObjectId coverImageId;
     private String traductionLanguage;
     private String initialLanguage;
     private Integer firstPublishYear;

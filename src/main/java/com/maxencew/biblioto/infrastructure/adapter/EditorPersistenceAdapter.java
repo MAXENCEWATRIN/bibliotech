@@ -6,20 +6,17 @@ import com.maxencew.biblioto.domain.ports.spi.EditorPersistencePort;
 import com.maxencew.biblioto.infrastructure.entity.EditorEntity;
 import com.maxencew.biblioto.infrastructure.exception.AppPersistenceException;
 import com.maxencew.biblioto.infrastructure.repository.EditorRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class EditorPersistenceAdapter implements EditorPersistencePort {
 
     private final EditorRepository editorRepository;
     private final EditorEntityMapper editorEntityMapper;
-
-    public EditorPersistenceAdapter(EditorRepository editorRepository, EditorEntityMapper editorEntityMapper) {
-        this.editorRepository = editorRepository;
-        this.editorEntityMapper = editorEntityMapper;
-    }
 
     @Override
     public Editor addEditor(Editor editor) {

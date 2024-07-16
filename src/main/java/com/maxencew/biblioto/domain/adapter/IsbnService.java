@@ -1,25 +1,19 @@
-package com.maxencew.biblioto.application.service;
+package com.maxencew.biblioto.domain.adapter;
 
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.domain.ports.spi.BookPersistencePort;
 import com.maxencew.biblioto.domain.ports.spi.OpenLibraryApiPort;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
-@Service
 @AllArgsConstructor
 public class IsbnService {
 
-
-    @Autowired
     private final BookPersistencePort bookPersistencePort;
-    @Autowired
     private final OpenLibraryApiPort openLibraryApiPort;
 
     public Book findBookByIsbnIdOnExternalResources(Long isbnId) {

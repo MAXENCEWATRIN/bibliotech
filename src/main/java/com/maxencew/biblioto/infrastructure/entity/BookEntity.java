@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,6 +34,7 @@ public class BookEntity extends BaseEntity {
     private Integer numberOfPage;
     private String openLibraryId;
     private String coverPageUrl;
+    private ObjectId coverImageId;
     private String traductionLanguage;
     private String initialLanguage;
     private Integer firstPublishYear;

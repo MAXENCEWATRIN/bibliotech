@@ -1,16 +1,14 @@
 package com.maxencew.biblioto.infrastructure.adapter;
 
-import com.maxencew.biblioto.infrastructure.mapper.entity.BookEntityMapper;
 import com.maxencew.biblioto.domain.model.Book;
 import com.maxencew.biblioto.domain.ports.spi.BookPersistencePort;
 import com.maxencew.biblioto.infrastructure.entity.BookEntity;
 import com.maxencew.biblioto.infrastructure.exception.AppPersistenceException;
+import com.maxencew.biblioto.infrastructure.mapper.entity.BookEntityMapper;
 import com.maxencew.biblioto.infrastructure.repository.BookRepository;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public class BookPersistenceAdapter implements BookPersistencePort {
 
     private final BookRepository bookRepository;

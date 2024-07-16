@@ -20,11 +20,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-12T16:56:08+0200",
+    date = "2024-07-13T02:31:12+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -50,6 +51,7 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         book.numberOfPage( request.getNumberOfPage() );
         book.openLibraryId( request.getOpenLibraryId() );
         book.coverPageUrl( request.getCoverPageUrl() );
+        book.coverImageId( request.getCoverImageId() );
         book.traductionLanguage( request.getTraductionLanguage() );
         book.initialLanguage( request.getInitialLanguage() );
         book.firstPublishYear( request.getFirstPublishYear() );
@@ -86,6 +88,7 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         Integer numberOfPage = null;
         String openLibraryId = null;
         String coverPageUrl = null;
+        ObjectId coverImageId = null;
         String traductionLanguage = null;
         String initialLanguage = null;
         Integer firstPublishYear = null;
@@ -113,6 +116,7 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         numberOfPage = book.getNumberOfPage();
         openLibraryId = book.getOpenLibraryId();
         coverPageUrl = book.getCoverPageUrl();
+        coverImageId = book.getCoverImageId();
         traductionLanguage = book.getTraductionLanguage();
         initialLanguage = book.getInitialLanguage();
         firstPublishYear = book.getFirstPublishYear();
@@ -128,7 +132,7 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         isAnOpenLibaryApiRegister = book.getIsAnOpenLibaryApiRegister();
         isAnOpenLibaryApiBookValidate = book.getIsAnOpenLibaryApiBookValidate();
 
-        BookResponse bookResponse = new BookResponse( id, isbnId, oldIsbnId, title, authorName, titleLong, subtitle, synopsis, summary, numberOfPage, openLibraryId, coverPageUrl, traductionLanguage, initialLanguage, firstPublishYear, firstSentence, editor, library, themes, owner, isWishList, overallReception, praises, criticisms, isAnOpenLibaryApiRegister, isAnOpenLibaryApiBookValidate );
+        BookResponse bookResponse = new BookResponse( id, isbnId, oldIsbnId, title, authorName, titleLong, subtitle, synopsis, summary, numberOfPage, openLibraryId, coverPageUrl, coverImageId, traductionLanguage, initialLanguage, firstPublishYear, firstSentence, editor, library, themes, owner, isWishList, overallReception, praises, criticisms, isAnOpenLibaryApiRegister, isAnOpenLibaryApiBookValidate );
 
         return bookResponse;
     }
@@ -265,9 +269,7 @@ public class BookDtoMapperImpl implements BookDtoMapper {
         category = editor.getCategory();
         edition = editor.getEdition();
 
-        List<BookResponse> books = null;
-
-        EditorResponse editorResponse = new EditorResponse( id, name, category, edition, books );
+        EditorResponse editorResponse = new EditorResponse( id, name, category, edition );
 
         return editorResponse;
     }
@@ -303,9 +305,7 @@ public class BookDtoMapperImpl implements BookDtoMapper {
             keywords = new ArrayList<String>( list );
         }
 
-        List<BookResponse> books = null;
-
-        ThemeResponse themeResponse = new ThemeResponse( id, name, keywords, books );
+        ThemeResponse themeResponse = new ThemeResponse( id, name, keywords );
 
         return themeResponse;
     }
