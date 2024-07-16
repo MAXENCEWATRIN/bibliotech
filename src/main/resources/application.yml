@@ -1,12 +1,12 @@
 server:
   servlet:
-    context-path: /biblioto
+    context-path: /bibliotech
 spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
   datasource:
-    url: jdbc:postgresql://localhost:5432/biblioto
+    url: jdbc:postgresql://localhost:5432/bibliotech
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver

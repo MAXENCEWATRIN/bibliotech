@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.maxencew</groupId>
-	<artifactId>biblioto</artifactId>
+	<artifactId>bibliotech</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>biblioto</name>
-	<description>Api for biblioto project</description>
+	<name>bibliotech</name>
+	<description>Api for bibliotech project</description>
 	<url/>
 	<licenses>
 		<license/>
