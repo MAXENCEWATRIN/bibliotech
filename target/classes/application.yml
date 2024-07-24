@@ -1,12 +1,12 @@
 server:
   servlet:
-    context-path: /biblioto
+    context-path: /bibliotech
 spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
   datasource:
-    url: jdbc:postgresql://localhost:5432/biblioto
+    url: jdbc:postgresql://localhost:5432/bibliotech
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
@@ -20,8 +20,8 @@ external:
       url: XXXXXXXXXX
       key: XXXXXX
     openLibrary:
-      login: ${OPENLIBRARY_LOGIN}
-      key: ${OPENLIBRARY_KEY}
+      login: ${OPEN_LIBRARY_LOGIN}
+      key: ${OPEN_LIBRARY_KEY}
       login-api:
         url: https://openlibrary.org/account/login
       covers-api:
