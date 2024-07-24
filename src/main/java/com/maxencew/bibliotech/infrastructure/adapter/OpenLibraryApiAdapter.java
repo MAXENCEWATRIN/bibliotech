@@ -84,14 +84,18 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
                 response.getBody().getRecords().forEach((_, openLibaryBookResponse) -> {
                     OpenLibraryBookApiResponse.DetailsData detailsData = openLibaryBookResponse.getDetails().getDetailsData();
 
-                    final var firstSentence = openLibaryBookResponse.getData().getExcerpts()
-                            .stream()
-                            .filter(OpenLibraryBookApiResponse.Excerpt::isFirstSentence)
-                            .findFirst();
+                    Optional<OpenLibraryBookApiResponse.Excerpt> excerpt = Optional.ofNullable(openLibaryBookResponse.getData())
+                            .map(OpenLibraryBookApiResponse.Data::getExcerpts)
+                            .flatMap(excerpts -> excerpts.stream()
+                                    .filter(OpenLibraryBookApiResponse.Excerpt::isFirstSentence)
+                                    .findFirst());
 
-                    final Editor editor = Editor.builder()
-                            .name(detailsData.getPublishers().getFirst())
-                            .build();
+                    Editor editor = null;
+                    if(Objects.nonNull(detailsData.getPublishers())) {
+                        editor = Editor.builder()
+                                .name(detailsData.getPublishers().getFirst())
+                                .build();
+                    }
 
                     List<OpenLibraryBookApiResponse.Item> items = response.getBody().getItems();
                     Optional<List<String>> isbn10 = Optional.ofNullable(detailsData.getIsbn10());
@@ -102,7 +106,7 @@ public class OpenLibraryApiAdapter implements OpenLibraryApiPort {
                             .titleLong(detailsData.getFullTitle())
                             .title(detailsData.getTitle())
                             .numberOfPage(detailsData.getNumberOfPages())
-                            .firstSentence(firstSentence.map(OpenLibraryBookApiResponse.Excerpt::getText).orElse(null))
+                            .firstSentence(excerpt.map(OpenLibraryBookApiResponse.Excerpt::getText).orElse(null))
                             .editor(editor)
                             .isAnOpenLibaryApiRegister(true)
                             .isAnOpenLibaryApiBookValidate(false)

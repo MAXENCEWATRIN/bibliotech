@@ -20,8 +20,8 @@ external:
       url: XXXXXXXXXX
       key: XXXXXX
     openLibrary:
-      login: ${OPENLIBRARY_LOGIN}
-      key: ${OPENLIBRARY_KEY}
+      login: ${OPEN_LIBRARY_LOGIN}
+      key: ${OPEN_LIBRARY_KEY}
       login-api:
         url: https://openlibrary.org/account/login
       covers-api:

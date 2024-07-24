@@ -6,4 +6,5 @@ public interface ImageService {
 
     ObjectId downloadAndStoreImage(String imageUrl);
     byte[] getImageById(ObjectId id);
+    void deleteImageById(ObjectId id);
 }

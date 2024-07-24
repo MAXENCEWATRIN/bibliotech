@@ -27,6 +27,7 @@ public class Book {
     private Integer numberOfPage;
     private String openLibraryId;
     private String coverPageUrl;
+    //TODO : refacto pour intégrer une gestion base64 de l'image si nécessaire, ou supprimer la fonctionalité import locale sur le front
     private ObjectId coverImageId;
     private String traductionLanguage;
     private String initialLanguage;

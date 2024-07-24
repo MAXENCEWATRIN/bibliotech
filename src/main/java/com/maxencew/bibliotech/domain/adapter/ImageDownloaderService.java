@@ -7,6 +7,7 @@ import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSDownloadStream;
 import com.mongodb.client.gridfs.model.GridFSUploadOptions;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 
@@ -15,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 @AllArgsConstructor
+@Slf4j
 public class ImageDownloaderService implements ImageService {
 
     private GridFSBucket gridFSBucket;
@@ -43,13 +45,27 @@ public class ImageDownloaderService implements ImageService {
     }
 
     public byte[] getImageById(ObjectId id) {
-        GridFSDownloadStream downloadStream = gridFSBucket.openDownloadStream(id);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        while ((bytesRead = downloadStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, bytesRead);
+        try {
+            GridFSDownloadStream downloadStream = gridFSBucket.openDownloadStream(id);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = downloadStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            return outputStream.toByteArray();
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("Error while trying to retrieve image by id %s", e.getMessage()));
         }
-        return outputStream.toByteArray();
+    }
+
+    @Override
+    public void deleteImageById(ObjectId id) {
+        try {
+            gridFSBucket.delete(id);
+            LOGGER.info("Image with id {} successfully deleted", id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error while deleting image ", e);
+        }
     }
 }

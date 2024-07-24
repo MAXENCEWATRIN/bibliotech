@@ -56,7 +56,8 @@ public class BookController {
 
     @GetMapping("/{id}")
     public BibliotechHttpResponse<BookResponse> getBookById(@PathVariable Long id) {
-        return BibliotechHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.getBookById(id)));
+        BookResponse dto = bookDtoMapper.toDto(bookServiceAdapter.getBookById(id));
+        return BibliotechHttpResponse.success(dto);
     }
 
     @GetMapping("isbn/{id}")

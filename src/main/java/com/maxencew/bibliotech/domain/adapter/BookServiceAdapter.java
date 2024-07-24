@@ -55,17 +55,39 @@ public class BookServiceAdapter implements BookService {
             book.setThemes(
                     book.getThemes()
                             .stream()
-                            .filter(theme -> Objects.isNull(theme.getId()))
-                            .map(themePersistencePort::addTheme)
+                            .map(theme -> Objects.nonNull(theme.getId()) ? theme : themePersistencePort.addTheme(theme))
                             .collect(Collectors.toList())
             );
         }
-        if (book.getCoverPageUrl() != null && !book.getCoverPageUrl().isEmpty()) {
+
+        if(Objects.nonNull(book.getId()) && (book.getCoverPageUrl() != null && !book.getCoverPageUrl().isEmpty())) {
+            Book retrieveBook = this.bookPersistencePort.getBookById(book.getId());
+            try {
+                if(Objects.nonNull(retrieveBook.getCoverImageId())) {
+                    imageDownloaderService.deleteImageById(retrieveBook.getCoverImageId());
+                }
+            } catch (Exception e) {
+                LOGGER.error("Erreur lors de la suppression de l'image dans la base.", e);
+            }
             ObjectId imageId = imageDownloaderService.downloadAndStoreImage(book.getCoverPageUrl());
             book.setCoverImageId(imageId);
+            book.setCoverPageUrl(null);
+            LOGGER.info("Livre existant (id : {}), avec remplacement de la couverture (id : {}).", book.getId(), book.getCoverImageId());
+            return this.bookPersistencePort.addBook(book);
+        } else if (Objects.nonNull(book.getId()) && (Objects.isNull(book.getCoverPageUrl())  || book.getCoverPageUrl().isEmpty())) {
+            Book retrieveBook = this.bookPersistencePort.getBookById(book.getId());
+            book.setCoverImageId(retrieveBook.getCoverImageId());
+            book.setCoverPageUrl(null);
+            LOGGER.info("Livre existant (id : {}), sans remplacement de la couverture (id : {}).", book.getId(), book.getCoverImageId());
+            return this.bookPersistencePort.addBook(book);
+        } else {
+            ObjectId imageId = imageDownloaderService.downloadAndStoreImage(book.getCoverPageUrl());
+            book.setCoverImageId(imageId);
+            book.setCoverPageUrl(null);
+            LOGGER.info("Création d'un livre (nom : {}), création de la couverture.", book.getTitle());
+            return this.bookPersistencePort.addBook(book);
         }
 
-        return this.bookPersistencePort.addBook(book);
     }
 
     public void removeBook(Book book) {
@@ -77,7 +99,8 @@ public class BookServiceAdapter implements BookService {
     }
 
     public Book getBookById(Long id) {
-        return this.bookPersistencePort.getBookById(id);
+        Book bookById = this.bookPersistencePort.getBookById(id);
+        return bookById;
     }
 
     public Book getByIsbnId(Long isbnId) {

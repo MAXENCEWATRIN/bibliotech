@@ -54,13 +54,12 @@ public class BookPersistenceAdapter implements BookPersistencePort {
 
     @Override
     public Book getBookById(Long bookId) {
-        BookEntity referenceById;
+       BookEntity referenceById;
         try {
             referenceById = this.bookRepository.getReferenceById(bookId);
         } catch (Exception e) {
             throw new AppPersistenceException(e.getMessage(), e);
         }
-
         return bookEntityMapper.toDomain(referenceById);
 
     }

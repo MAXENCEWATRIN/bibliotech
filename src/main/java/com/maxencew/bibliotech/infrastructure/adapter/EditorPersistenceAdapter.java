@@ -1,10 +1,10 @@
 package com.maxencew.bibliotech.infrastructure.adapter;
 
-import com.maxencew.bibliotech.infrastructure.mapper.entity.EditorEntityMapper;
 import com.maxencew.bibliotech.domain.model.Editor;
 import com.maxencew.bibliotech.domain.ports.spi.EditorPersistencePort;
 import com.maxencew.bibliotech.infrastructure.entity.EditorEntity;
 import com.maxencew.bibliotech.infrastructure.exception.AppPersistenceException;
+import com.maxencew.bibliotech.infrastructure.mapper.entity.EditorEntityMapper;
 import com.maxencew.bibliotech.infrastructure.repository.EditorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

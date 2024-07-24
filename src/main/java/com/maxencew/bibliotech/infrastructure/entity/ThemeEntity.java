@@ -1,31 +1,28 @@
 package com.maxencew.bibliotech.infrastructure.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@ToString(exclude = "books")
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "THEMES")
+@Entity
+@Table(name = "THEMES")
 public class ThemeEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @ElementCollection
     private List<String> keywords;
-    @ManyToMany
-    @JoinTable(
-            name = "theme_book",
-            joinColumns = @JoinColumn(name = "theme_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id")
-    )
+
+    @ManyToMany(mappedBy = "themes", fetch = FetchType.EAGER)
     private List<BookEntity> books;
 
 }

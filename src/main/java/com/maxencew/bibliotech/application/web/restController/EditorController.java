@@ -2,8 +2,8 @@ package com.maxencew.bibliotech.application.web.restController;
 
 import com.maxencew.bibliotech.application.mapper.dto.EditorDtoMapper;
 import com.maxencew.bibliotech.application.request.EditorRequest;
-import com.maxencew.bibliotech.application.response.EditorResponse;
 import com.maxencew.bibliotech.application.response.BibliotechHttpResponse;
+import com.maxencew.bibliotech.application.response.EditorResponse;
 import com.maxencew.bibliotech.application.service.api.EditorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

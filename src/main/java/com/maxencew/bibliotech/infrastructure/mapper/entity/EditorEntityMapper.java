@@ -1,8 +1,8 @@
 package com.maxencew.bibliotech.infrastructure.mapper.entity;
 
 import com.maxencew.bibliotech.application.exception.MappingEntityException;
-import com.maxencew.bibliotech.infrastructure.entity.EditorEntity;
 import com.maxencew.bibliotech.domain.model.Editor;
+import com.maxencew.bibliotech.infrastructure.entity.EditorEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

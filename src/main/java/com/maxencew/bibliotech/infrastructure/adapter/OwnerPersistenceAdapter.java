@@ -1,10 +1,10 @@
 package com.maxencew.bibliotech.infrastructure.adapter;
 
-import com.maxencew.bibliotech.infrastructure.mapper.entity.OwnerEntityMapper;
 import com.maxencew.bibliotech.domain.model.Owner;
 import com.maxencew.bibliotech.domain.ports.spi.OwnerPersistencePort;
 import com.maxencew.bibliotech.infrastructure.entity.OwnerEntity;
 import com.maxencew.bibliotech.infrastructure.exception.AppPersistenceException;
+import com.maxencew.bibliotech.infrastructure.mapper.entity.OwnerEntityMapper;
 import com.maxencew.bibliotech.infrastructure.repository.OwnerRepository;
 import org.springframework.stereotype.Component;
 

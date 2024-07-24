@@ -1,7 +1,6 @@
 package com.maxencew.bibliotech.application.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.maxencew.bibliotech.application.request.OpenAiRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

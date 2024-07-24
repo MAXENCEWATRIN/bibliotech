@@ -1,14 +1,15 @@
 package com.maxencew.bibliotech.infrastructure.adapter;
 
-import com.maxencew.bibliotech.infrastructure.mapper.entity.ThemeEntityMapper;
 import com.maxencew.bibliotech.domain.model.Theme;
 import com.maxencew.bibliotech.domain.ports.spi.ThemePersistencePort;
 import com.maxencew.bibliotech.infrastructure.entity.ThemeEntity;
 import com.maxencew.bibliotech.infrastructure.exception.AppPersistenceException;
+import com.maxencew.bibliotech.infrastructure.mapper.entity.ThemeEntityMapper;
 import com.maxencew.bibliotech.infrastructure.repository.ThemeRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ThemePerstenceAdapter implements ThemePersistencePort {
@@ -56,12 +57,15 @@ public class ThemePerstenceAdapter implements ThemePersistencePort {
 
     @Override
     public Theme getThemeById(Long themeId) {
-        ThemeEntity referenceById;
+        Optional<ThemeEntity> referenceById;
         try {
-            referenceById = this.themeRepository.getReferenceById(themeId);
+            referenceById = this.themeRepository.findById(themeId);
+            if(referenceById.isEmpty()) {
+                throw new AppPersistenceException("ERREUR");
+            }
         } catch (Exception e) {
             throw new AppPersistenceException(e.getMessage(), e);
         }
-        return themeEntityMapper.toDomain(referenceById);
+        return themeEntityMapper.toDomain(referenceById.get());
     }
 }

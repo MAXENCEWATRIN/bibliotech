@@ -12,7 +12,7 @@ public class MongoDbConfiguration {
     //TODO : Modifier nom de base quand possible
     @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(MongoClients.create("mongodb://localhost:27017"), "biblioto");
+        return new MongoTemplate(MongoClients.create("mongodb://localhost:27017"), "bibliotech");
     }
 
     @Bean
