@@ -1,12 +1,13 @@
 package com.maxencew.bibliotech.infrastructure.configuration;
 
-import com.maxencew.bibliotech.application.service.api.*;
-import com.maxencew.bibliotech.domain.adapter.*;
+import com.maxencew.bibliotech.domain.ports.api.*;
 import com.maxencew.bibliotech.domain.ports.spi.*;
+import com.maxencew.bibliotech.domain.service.adapter.*;
 import com.mongodb.client.gridfs.GridFSBucket;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
@@ -20,6 +21,16 @@ public class AppConfig {
     @Bean
     EditorService editorService(EditorPersistencePort editorRepository) {
         return new EditorServiceAdapter(editorRepository);
+    }
+
+    @Bean
+    BookConsumer bookConsumer(BookService bookService) {
+        return new BookConsumerAdapter(bookService);
+    }
+
+    @Bean
+    BookProducer bookProducer(KafkaTemplate<String, Long> kafkaTemplate) {
+        return new BookProducerAdapter(kafkaTemplate);
     }
 
     @Bean

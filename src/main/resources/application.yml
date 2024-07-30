@@ -14,6 +14,16 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+  kafka:
+    bootstrap-servers: localhost:9092
+    topic:
+      book: topic-bibliotech-books
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: bibliotech-group
+      listener:
+        missing-topics-fatal: false
 external:
   api:
     isbn:

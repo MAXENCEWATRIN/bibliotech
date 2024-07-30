@@ -1,4 +1,4 @@
-package com.maxencew.bibliotech.application.service.api;
+package com.maxencew.bibliotech.domain.ports.api;
 
 import org.bson.types.ObjectId;
 

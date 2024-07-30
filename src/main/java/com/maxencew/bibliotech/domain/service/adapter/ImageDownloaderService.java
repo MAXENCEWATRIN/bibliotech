@@ -1,7 +1,7 @@
-package com.maxencew.bibliotech.domain.adapter;
+package com.maxencew.bibliotech.domain.service.adapter;
 
 import com.maxencew.bibliotech.application.exception.BusinessException;
-import com.maxencew.bibliotech.application.service.api.ImageService;
+import com.maxencew.bibliotech.domain.ports.api.ImageService;
 import com.maxencew.bibliotech.infrastructure.configuration.AppConfig;
 import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSDownloadStream;

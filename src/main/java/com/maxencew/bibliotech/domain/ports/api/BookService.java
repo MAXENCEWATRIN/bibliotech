@@ -1,4 +1,4 @@
-package com.maxencew.bibliotech.application.service.api;
+package com.maxencew.bibliotech.domain.ports.api;
 
 import com.maxencew.bibliotech.domain.model.Book;
 
@@ -13,5 +13,6 @@ public interface BookService {
     List<Book> getBooks();
 
     Book getBookById(Long bookId);
+
     Book getByIsbnId(Long bookId);
 }

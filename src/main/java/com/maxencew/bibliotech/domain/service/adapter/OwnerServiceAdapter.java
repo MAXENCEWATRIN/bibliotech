@@ -1,6 +1,6 @@
-package com.maxencew.bibliotech.domain.adapter;
+package com.maxencew.bibliotech.domain.service.adapter;
 
-import com.maxencew.bibliotech.application.service.api.OwnerService;
+import com.maxencew.bibliotech.domain.ports.api.OwnerService;
 import com.maxencew.bibliotech.domain.model.Owner;
 import com.maxencew.bibliotech.domain.ports.spi.OwnerPersistencePort;
 import lombok.AllArgsConstructor;

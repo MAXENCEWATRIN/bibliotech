@@ -4,7 +4,7 @@ import com.maxencew.bibliotech.application.mapper.dto.ThemeDtoMapper;
 import com.maxencew.bibliotech.application.request.ThemeRequest;
 import com.maxencew.bibliotech.application.response.BibliotechHttpResponse;
 import com.maxencew.bibliotech.application.response.ThemeResponse;
-import com.maxencew.bibliotech.application.service.api.ThemeService;
+import com.maxencew.bibliotech.domain.ports.api.ThemeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

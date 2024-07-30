@@ -4,12 +4,16 @@ import com.maxencew.bibliotech.application.mapper.dto.BookDtoMapper;
 import com.maxencew.bibliotech.application.request.BookRequest;
 import com.maxencew.bibliotech.application.response.BibliotechHttpResponse;
 import com.maxencew.bibliotech.application.response.BookResponse;
-import com.maxencew.bibliotech.application.service.api.BookService;
-import com.maxencew.bibliotech.application.service.api.ImageService;
+import com.maxencew.bibliotech.domain.ports.api.BookConsumer;
+import com.maxencew.bibliotech.domain.ports.api.BookProducer;
+import com.maxencew.bibliotech.domain.ports.api.BookService;
+import com.maxencew.bibliotech.domain.ports.api.ImageService;
 import com.maxencew.bibliotech.domain.model.Book;
+import com.maxencew.bibliotech.infrastructure.dto.BookConsumerMessage;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -24,6 +28,8 @@ public class BookController {
 
     @Autowired
     private BookService bookServiceAdapter;
+    @Autowired
+    private BookProducer bookProducer;
     @Autowired
     private ImageService imageDownloaderService;
     @Autowired
@@ -64,6 +70,12 @@ public class BookController {
     public void getBookByIsbn(@PathVariable Long id) {
         BibliotechHttpResponse<BookResponse> success = BibliotechHttpResponse.success(bookDtoMapper.toDto(bookServiceAdapter.getByIsbnId(id)));
         simpMessagingTemplate.convertAndSend("/topic/books", success);
+    }
+
+    @PostMapping("/isbn")
+    public ResponseEntity<BibliotechHttpResponse<BookConsumerMessage>> processBookInit(@RequestBody BookConsumerMessage isbnIdBookRequest) {
+        bookProducer.handleBook(isbnIdBookRequest);
+        return new ResponseEntity<>(BibliotechHttpResponse.success(isbnIdBookRequest), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{id}/cover")

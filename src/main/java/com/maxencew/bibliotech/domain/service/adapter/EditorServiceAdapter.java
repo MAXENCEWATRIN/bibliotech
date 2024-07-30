@@ -1,6 +1,6 @@
-package com.maxencew.bibliotech.domain.adapter;
+package com.maxencew.bibliotech.domain.service.adapter;
 
-import com.maxencew.bibliotech.application.service.api.EditorService;
+import com.maxencew.bibliotech.domain.ports.api.EditorService;
 import com.maxencew.bibliotech.domain.model.Editor;
 import com.maxencew.bibliotech.domain.ports.spi.EditorPersistencePort;
 import lombok.AllArgsConstructor;

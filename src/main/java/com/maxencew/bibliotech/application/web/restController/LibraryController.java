@@ -4,7 +4,7 @@ import com.maxencew.bibliotech.application.mapper.dto.LibraryDtoMapper;
 import com.maxencew.bibliotech.application.request.LibraryRequest;
 import com.maxencew.bibliotech.application.response.BibliotechHttpResponse;
 import com.maxencew.bibliotech.application.response.LibraryResponse;
-import com.maxencew.bibliotech.application.service.api.LibraryService;
+import com.maxencew.bibliotech.domain.ports.api.LibraryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -4,7 +4,7 @@ import com.maxencew.bibliotech.application.mapper.dto.OwnerDtoMapper;
 import com.maxencew.bibliotech.application.request.OwnerRequest;
 import com.maxencew.bibliotech.application.response.BibliotechHttpResponse;
 import com.maxencew.bibliotech.application.response.OwnerResponse;
-import com.maxencew.bibliotech.application.service.api.OwnerService;
+import com.maxencew.bibliotech.domain.ports.api.OwnerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

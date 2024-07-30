@@ -2,7 +2,7 @@ package com.maxencew.bibliotech.application.mapper.dto;
 
 import com.maxencew.bibliotech.application.exception.MappingException;
 import com.maxencew.bibliotech.domain.model.Book;
-import com.maxencew.bibliotech.infrastructure.external.OpenLibraryBookApiResponse;
+import com.maxencew.bibliotech.application.external.OpenLibraryBookApiResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 

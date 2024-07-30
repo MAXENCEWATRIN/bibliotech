@@ -1,11 +1,11 @@
-package com.maxencew.bibliotech.infrastructure.adapter;
+package com.maxencew.bibliotech.domain.service.adapter;
 
 import com.maxencew.bibliotech.application.mapper.dto.OpenLibraryBookMapper;
 import com.maxencew.bibliotech.domain.model.Book;
 import com.maxencew.bibliotech.domain.model.Editor;
 import com.maxencew.bibliotech.domain.ports.spi.OpenLibraryApiPort;
 import com.maxencew.bibliotech.infrastructure.exception.ExternalRessourcesCommunicationException;
-import com.maxencew.bibliotech.infrastructure.external.OpenLibraryBookApiResponse;
+import com.maxencew.bibliotech.application.external.OpenLibraryBookApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

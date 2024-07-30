@@ -1,11 +1,11 @@
-package com.maxencew.bibliotech.domain.adapter;
+package com.maxencew.bibliotech.domain.service.adapter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maxencew.bibliotech.application.request.OpenAiRequest;
 import com.maxencew.bibliotech.application.response.ChatGptSummariseBookPattern;
 import com.maxencew.bibliotech.application.response.OpenAiResponse;
-import com.maxencew.bibliotech.application.service.api.OpenAIService;
+import com.maxencew.bibliotech.domain.ports.api.OpenAIService;
 import com.maxencew.bibliotech.infrastructure.configuration.AppConfig;
 import lombok.AllArgsConstructor;
 import org.springframework.core.env.Environment;

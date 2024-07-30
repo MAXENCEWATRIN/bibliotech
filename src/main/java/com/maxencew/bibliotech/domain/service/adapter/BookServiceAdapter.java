@@ -1,9 +1,9 @@
-package com.maxencew.bibliotech.domain.adapter;
+package com.maxencew.bibliotech.domain.service.adapter;
 
 import com.maxencew.bibliotech.application.response.ChatGptSummariseBookPattern;
-import com.maxencew.bibliotech.application.service.api.BookService;
-import com.maxencew.bibliotech.application.service.api.ImageService;
-import com.maxencew.bibliotech.application.service.api.OpenAIService;
+import com.maxencew.bibliotech.domain.ports.api.BookService;
+import com.maxencew.bibliotech.domain.ports.api.ImageService;
+import com.maxencew.bibliotech.domain.ports.api.OpenAIService;
 import com.maxencew.bibliotech.domain.model.Book;
 import com.maxencew.bibliotech.domain.ports.spi.*;
 import jakarta.transaction.Transactional;
